@@ -1,0 +1,13 @@
+{
+  "name": "DS-A",
+  "version": "1.0.0",
+  "description": "Data Structures and Algorithms",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "author": "RetroAstro",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^3.3.3333"
+  }
+}

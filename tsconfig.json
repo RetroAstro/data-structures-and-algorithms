@@ -1,0 +1,16 @@
+{
+   "compilerOptions": {
+     "rootDir": "src",
+     "outDir": "dist",
+     "target": "esnext",
+     "module": "esnext",
+     "moduleResolution": "node",
+     "allowJs": false,
+     "removeComments": true,
+   },
+   "exclude": [
+     "dist",
+     "node_modules"
+   ]
+ }
+ 
