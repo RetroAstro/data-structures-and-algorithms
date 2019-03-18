@@ -1,1 +1,1 @@
-const value:number = 2333
+export const value:string = 'single linked list'
