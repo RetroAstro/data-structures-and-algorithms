@@ -1,1 +1,1 @@
-export const value:string = 'doubly linked list';
+export const str:string = '2333'
