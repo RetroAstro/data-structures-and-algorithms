@@ -1,30 +1,25 @@
-// 单链表
-// 节点类、链表类
-// 插入节点、删除节点、查找节点、显示全部节点
-// fiber 中的单链表实现
-
 export const HEAD: string = 'HEAD'
 
-interface LinkNodeInterface {
+interface LinkedNodeInterface {
    data: string
-   next: LinkNodeInterface
+   next: LinkedNodeInterface
 }
 
-class LinkNode implements LinkNodeInterface {
+class LinkedNode implements LinkedNodeInterface {
    data: string
-   next: LinkNodeInterface
+   next: LinkedNodeInterface
    constructor (data: string) {
       this.data = data
       this.next = null
    }
 }
 
-class List {
-   private head: LinkNodeInterface
+class LinkedList {
+   private head: LinkedNodeInterface
    constructor () {
-      this.head = new LinkNode(HEAD)
+      this.head = new LinkedNode(HEAD)
    }
-   insert (node: LinkNodeInterface, data: string):void {
+   insert (node: LinkedNodeInterface, data: string):void {
       const target = this.find(data)
       node.next = target.next
       target.next = node
@@ -39,14 +34,14 @@ class List {
          target.next = target.next.next
       }
    }
-   find (data: string):LinkNodeInterface {
+   find (data: string):LinkedNodeInterface {
       let current = this.head
       while (current && current.data !== data) {
          current = current.next
       }
       return current
    }
-   findPrev (data: string):LinkNodeInterface {
+   findPrev (data: string):LinkedNodeInterface {
       let current = this.head
       while (current && current.next && current.next.data !== data) {
          current = current.next
@@ -62,10 +57,10 @@ class List {
    }
 }
 
-let list = new List()
-let node1 = new LinkNode('node1')
-let node2 = new LinkNode('node2')
-let node3 = new LinkNode('node3')
+let list = new LinkedList()
+let node1 = new LinkedNode('node1')
+let node2 = new LinkedNode('node2')
+let node3 = new LinkedNode('node3')
 
 list.insert(node1, HEAD)
 list.insert(node2, 'node1')
