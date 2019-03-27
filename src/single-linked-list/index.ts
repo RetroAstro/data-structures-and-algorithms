@@ -3,7 +3,7 @@
 // 插入节点、删除节点、查找节点、显示全部节点
 // fiber 中的单链表实现
 
-const HEAD: string = 'HEAD'
+export const HEAD: string = 'HEAD'
 
 interface LinkNodeInterface {
    data: string
