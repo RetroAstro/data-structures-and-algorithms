@@ -19,37 +19,45 @@ class LinkedList {
    constructor () {
       this.head = new LinkedNode(HEAD)
    }
-   insert (node: LinkedNodeInterface, data: string):void {
-      const target = this.find(data)
+   insert (node: LinkedNodeInterface, data: string) {
+      let target = this.find(data)
+
       node.next = target.next
       target.next = node
    }
-   remove (data: string):void {
+   remove (data: string) {
       if (data === HEAD) {
          console.log(`HEAD can't be removed !`)
          return
       }
-      const target = this.findPrev(data)
+
+      let target = this.findPrev(data)
+
       if (target.next) {
          target.next = target.next.next
       }
    }
    find (data: string):LinkedNodeInterface {
       let current = this.head
+
       while (current && current.data !== data) {
          current = current.next
       }
+
       return current
    }
    findPrev (data: string):LinkedNodeInterface {
       let current = this.head
+
       while (current && current.next && current.next.data !== data) {
          current = current.next
       }
+
       return current
    }
-   display ():void {
+   display () {
       let current = this.head
+
       while (current.next) {
          console.log(current.next.data)
          current = current.next
@@ -67,7 +75,6 @@ list.insert(node2, 'node1')
 list.insert(node3, 'node2')
 list.display() // node1 node2 node3
 list.remove('node3')
-list.display() // node1 node2 
+list.display() // node1 node2
 list.remove('node1')
 list.display() // node2
-

@@ -1,7 +1,7 @@
 {
-  "name": "ds-a",
+  "name": "data-structures-and-algorithms",
   "version": "1.0.0",
-  "description": "Data Structures and Algorithms",
+  "description": "Data Structures and Algorithms in JavaScript",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json"
   },
