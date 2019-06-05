@@ -1,68 +1,68 @@
 export const HEAD: string = 'HEAD'
 
 interface LinkedNodeInterface {
-   data: string
-   next: LinkedNodeInterface
+  data: string
+  next: LinkedNodeInterface
 }
 
 class LinkedNode implements LinkedNodeInterface {
-   data: string
-   next: LinkedNodeInterface
-   constructor (data: string) {
-      this.data = data
-      this.next = null
-   }
+  data: string
+  next: LinkedNodeInterface
+  constructor (data: string) {
+    this.data = data
+    this.next = null
+  }
 }
 
 class LinkedList {
-   private head: LinkedNodeInterface
-   constructor () {
-      this.head = new LinkedNode(HEAD)
-   }
-   insert (node: LinkedNodeInterface, data: string) {
-      let target = this.find(data)
+  private head: LinkedNodeInterface
+  constructor () {
+    this.head = new LinkedNode(HEAD)
+  }
+  insert (node: LinkedNodeInterface, data: string) {
+    let target = this.find(data)
 
-      node.next = target.next
-      target.next = node
-   }
-   remove (data: string) {
-      if (data === HEAD) {
-         console.log(`HEAD can't be removed !`)
-         return
-      }
+    node.next = target.next
+    target.next = node
+  }
+  remove (data: string) {
+    if (data === HEAD) {
+      console.log(`HEAD can't be removed !`)
+      return
+    }
 
-      let target = this.findPrev(data)
+    let target = this.findPrev(data)
 
-      if (target.next) {
-         target.next = target.next.next
-      }
-   }
-   find (data: string):LinkedNodeInterface {
-      let current = this.head
+    if (target.next) {
+      target.next = target.next.next
+    }
+  }
+  find (data: string):LinkedNodeInterface {
+    let current = this.head
 
-      while (current && current.data !== data) {
-         current = current.next
-      }
+    while (current && current.data !== data) {
+      current = current.next
+    }
 
-      return current
-   }
-   findPrev (data: string):LinkedNodeInterface {
-      let current = this.head
+    return current
+  }
+  findPrev (data: string):LinkedNodeInterface {
+    let current = this.head
 
-      while (current && current.next && current.next.data !== data) {
-         current = current.next
-      }
+    while (current && current.next && current.next.data !== data) {
+      current = current.next
+    }
 
-      return current
-   }
-   display () {
-      let current = this.head
+    return current
+  }
+  display () {
+    let current = this.head
 
-      while (current.next) {
-         console.log(current.next.data)
-         current = current.next
-      }
-   }
+    while (current.next) {
+      console.log(current.next.data)
+      current = current.next
+    }
+  }
 }
 
 let list = new LinkedList()
