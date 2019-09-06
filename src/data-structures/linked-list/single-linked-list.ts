@@ -1,11 +1,11 @@
-export const HEAD: string = 'HEAD'
+const HEAD: string = 'HEAD'
 
 interface LinkedNodeInterface {
   data: string
   next: LinkedNodeInterface
 }
 
-class LinkedNode implements LinkedNodeInterface {
+export default class LinkedNode implements LinkedNodeInterface {
   data: string
   next: LinkedNodeInterface
   constructor (data: string) {
