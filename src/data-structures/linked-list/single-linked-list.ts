@@ -37,7 +37,7 @@ class LinkedList {
       target.next = target.next.next
     }
   }
-  find (data: string):LinkedNodeInterface {
+  find (data: string): LinkedNodeInterface {
     let current = this.head
 
     while (current && current.data !== data) {
@@ -46,7 +46,7 @@ class LinkedList {
 
     return current
   }
-  findPrev (data: string):LinkedNodeInterface {
+  findPrev (data: string): LinkedNodeInterface {
     let current = this.head
 
     while (current && current.next && current.next.data !== data) {
