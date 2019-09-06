@@ -8,7 +8,7 @@ interface LinkedNodeInterface {
 export default class LinkedNode implements LinkedNodeInterface {
   data: string
   next: LinkedNodeInterface
-  constructor (data: string) {
+  constructor(data: string) {
     this.data = data
     this.next = null
   }
@@ -16,16 +16,16 @@ export default class LinkedNode implements LinkedNodeInterface {
 
 class LinkedList {
   private head: LinkedNodeInterface
-  constructor () {
+  constructor() {
     this.head = new LinkedNode(HEAD)
   }
-  insert (node: LinkedNodeInterface, data: string) {
+  insert(node: LinkedNodeInterface, data: string) {
     let target = this.find(data)
 
     node.next = target.next
     target.next = node
   }
-  remove (data: string) {
+  remove(data: string) {
     if (data === HEAD) {
       console.log(`HEAD can't be removed !`)
       return
@@ -37,7 +37,7 @@ class LinkedList {
       target.next = target.next.next
     }
   }
-  find (data: string): LinkedNodeInterface {
+  find(data: string): LinkedNodeInterface {
     let current = this.head
 
     while (current && current.data !== data) {
@@ -46,7 +46,7 @@ class LinkedList {
 
     return current
   }
-  findPrev (data: string): LinkedNodeInterface {
+  findPrev(data: string): LinkedNodeInterface {
     let current = this.head
 
     while (current && current.next && current.next.data !== data) {
@@ -55,7 +55,7 @@ class LinkedList {
 
     return current
   }
-  display () {
+  display() {
     let current = this.head
 
     while (current.next) {
