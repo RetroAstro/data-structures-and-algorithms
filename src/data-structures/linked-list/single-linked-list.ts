@@ -5,7 +5,7 @@ interface LinkedNodeInterface {
   next: LinkedNodeInterface
 }
 
-export default class LinkedNode implements LinkedNodeInterface {
+class LinkedNode implements LinkedNodeInterface {
   data: string
   next: LinkedNodeInterface
   constructor(data: string) {
@@ -14,7 +14,7 @@ export default class LinkedNode implements LinkedNodeInterface {
   }
 }
 
-class LinkedList {
+export default class LinkedList {
   private head: LinkedNodeInterface
   constructor() {
     this.head = new LinkedNode(HEAD)
