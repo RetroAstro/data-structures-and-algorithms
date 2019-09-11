@@ -8,6 +8,8 @@
   "author": "RetroAstro",
   "license": "MIT",
   "dependencies": {
+    "@types/chai": "^4.2.2",
+    "@types/mocha": "^5.2.7",
     "typescript": "^3.3.3333"
   }
 }
