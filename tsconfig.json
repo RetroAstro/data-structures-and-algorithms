@@ -2,15 +2,17 @@
    "compilerOptions": {
      "rootDir": "src",
      "outDir": "dist",
-     "target": "esnext",
-     "module": "esnext",
-     "moduleResolution": "node",
+     "target": "es5",
+     "module": "commonjs",
      "allowJs": false,
      "removeComments": true,
+     "noImplicitAny": true,
+     "noImplicitThis": true,
+     "alwaysStrict": true,
+     "noUnusedLocals": true,
+     "noUnusedParameters": true,
+     "noImplicitReturns": true
    },
-   "exclude": [
-     "dist",
-     "node_modules"
-   ]
+   "include": ["src"],
+   "exclude": ["dist", "node_modules"]
  }
- 
