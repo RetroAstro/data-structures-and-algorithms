@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "description": "Data Structures and Algorithms in JavaScript",
   "scripts": {
-    "build": "rm -rf dist && tsc -p tsconfig.json"
+    "build": "rm -rf dist && tsc -p tsconfig.json",
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts"
   },
   "author": "RetroAstro",
   "license": "MIT",
   "dependencies": {
     "@types/chai": "^4.2.2",
     "@types/mocha": "^5.2.7",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0",
+    "ts-node": "^8.4.1",
     "typescript": "^3.3.3333"
   }
 }
