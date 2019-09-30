@@ -28,10 +28,10 @@ describe('concat', () => {
   })
 
   it('should throw when not an array', () => {
-    function test() {
+    function invalid() {
       let container = new concatContainer(2333)
       container.concat([])
     }
-    expect(test).to.throw('can not accept invalid type expect array !')
+    expect(invalid).to.throw('can not accept invalid type expect array !')
   })
 })
