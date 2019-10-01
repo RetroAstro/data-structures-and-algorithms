@@ -4,7 +4,7 @@
   "description": "Data Structures and Algorithms in JavaScript",
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
-    "test": "mocha -r ts-node/register tests/**/*.spec.ts"
+    "test": "mocha -r ts-node/register tests/**/*.spec.ts tests/**/**/*.spec.ts"
   },
   "author": "RetroAstro",
   "license": "MIT",
