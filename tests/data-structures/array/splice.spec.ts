@@ -81,4 +81,12 @@ describe('splice', () => {
     expect(newValue).to.deep.equal(['angel', 'clown', 'mandarin', 'sturgeon'])
     expect(deleteValue).to.deep.equal([])
   })
+
+  it('should throw when not an array', () => {
+    function invalid() {
+      let container = new spliceContainer(2333)
+      container.splice()
+    }
+    expect(invalid).to.throw('can not accept invalid type expect array !')
+  })
 })

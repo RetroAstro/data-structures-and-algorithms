@@ -27,6 +27,11 @@ describe('concat', () => {
     expect(container.concat([])).to.deep.equal([])
   })
 
+  it('should not act when empty concat', () => {
+    let container = new concatContainer([1, 2])
+    expect(container.concat()).to.deep.equal([1, 2])
+  })
+
   it('should throw when not an array', () => {
     function invalid() {
       let container = new concatContainer(2333)
