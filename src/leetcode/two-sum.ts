@@ -1,7 +1,7 @@
-type map = { [key: number]: number }
+type Map = { [key: number]: number }
 
 export function twoSum(nums: number[], target: number) {
-  let obj = <map>{}
+  let obj = <Map>{}
   
   for (let i = 0; i < nums.length; i++) {
     if (obj[nums[i]] !== undefined) {

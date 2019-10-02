@@ -20,7 +20,7 @@ export function threeSum(nums: number[]) {
         if (map[key]) {
           continue
         } else {
-          map[key] = key
+          map[key] = value
         }
         result.push(value)
       } else {
