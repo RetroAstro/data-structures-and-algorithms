@@ -1,8 +1,7 @@
-type res = { [key: number]: number }
+type map = { [key: number]: number }
 
 export function twoSum(nums: number[], target: number) {
-  let result: number[] = []
-  let obj = <res>{}
+  let obj = <map>{}
   
   for (let i = 0; i < nums.length; i++) {
     obj[nums[i]] = i
@@ -11,10 +10,9 @@ export function twoSum(nums: number[], target: number) {
   for (let i = 0; i < nums.length; i++) {
     let key = target - nums[i]
     if (obj[key] && i !== obj[key]) {
-      result = [i, obj[key]]
-      break
+      return [i, obj[key]]
     }
   }
-
-  return result
+  
+  return undefined
 }
