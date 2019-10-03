@@ -10,7 +10,7 @@ export class SinglyLinkedList<T> {
       this.head = node
     } else {
       let current = this.head
-      while (current != null) {
+      while (current.next != null) {
         current = current.next
       }
       current.next = node
