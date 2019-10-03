@@ -1,6 +1,6 @@
 import { Node } from './models'
 
-export class SingleLinkedList<T> {
+export class SinglyLinkedList<T> {
   protected count: number = 0
   protected head: Node<T> | undefined
   push(data: T) {

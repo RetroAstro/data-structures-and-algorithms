@@ -1,7 +1,7 @@
-import { SingleLinkedList } from './single-linked-list'
+import { SinglyLinkedList } from './singly-linked-list'
 import { DoublyNode } from './models'
 
-export class DoublyLinkedList<T> extends SingleLinkedList<T> {
+export class DoublyLinkedList<T> extends SinglyLinkedList<T> {
   protected head: DoublyNode<T> | undefined
   protected tail: DoublyNode<T> | undefined
   push(data: T) {
