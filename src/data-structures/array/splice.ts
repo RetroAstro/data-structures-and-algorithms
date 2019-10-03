@@ -20,6 +20,7 @@ export class spliceContainer extends Container {
     let deleteValue = this.makeDeleteValue(start, deleteCount)
     return [newValue, deleteValue]
   }
+
   makeNewValue(start: number, deleteCount: number, args: any[]) {
     let result = []
     for (let i = 0; i < start; i++) {
@@ -33,6 +34,7 @@ export class spliceContainer extends Container {
     }
     return result
   }
+  
   makeDeleteValue(start: number, deleteCount: number) {
     let result = []
     let limit = (start + deleteCount) > this._array.length ? this._array.length : (start + deleteCount)

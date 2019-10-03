@@ -1,5 +1,6 @@
 export class Container {
   protected _array: any[]
+  
   constructor(array: any) {
     if (Array.isArray(array)) {
       this._array = array

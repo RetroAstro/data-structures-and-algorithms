@@ -4,6 +4,7 @@ import { DoublyNode } from './models'
 export class DoublyLinkedList<T> extends SinglyLinkedList<T> {
   protected head: DoublyNode<T> | undefined
   protected tail: DoublyNode<T> | undefined
+
   push(data: T) {
     let node = new DoublyNode(data)
     if (this.head == null) {
@@ -16,6 +17,7 @@ export class DoublyLinkedList<T> extends SinglyLinkedList<T> {
     }
     this.count++
   }
+
   insert(data: T, index: number) {
     if (index >= 0 && index <= this.count) {
       let node = new DoublyNode(data)
@@ -47,6 +49,7 @@ export class DoublyLinkedList<T> extends SinglyLinkedList<T> {
     }
     return false
   }
+
   removeAt(index: number) {
     if (index >= 0 && index < this.count) {
       let current = this.head
@@ -72,9 +75,11 @@ export class DoublyLinkedList<T> extends SinglyLinkedList<T> {
     }
     return undefined
   }
+
   getTail() {
     return this.tail
   }
+  
   clear() {
     super.clear()
     this.tail = undefined

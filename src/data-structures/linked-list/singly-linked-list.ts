@@ -3,6 +3,7 @@ import { Node } from './models'
 export class SinglyLinkedList<T> {
   protected count: number = 0
   protected head: Node<T> | undefined
+
   push(data: T) {
     let node = new Node(data)
     if (this.head == null) {
@@ -16,6 +17,7 @@ export class SinglyLinkedList<T> {
     }
     this.count++
   }
+
   getNodeAt(index: number) {
     let node = this.head
     for (let i = 0; i < index && node != null; i++) {
@@ -23,6 +25,7 @@ export class SinglyLinkedList<T> {
     }
     return node
   }
+
   insert(data: T, index: number) {
     if (index >= 0 && index <= this.count) {
       let node = new Node(data)
@@ -40,10 +43,12 @@ export class SinglyLinkedList<T> {
     }
     return false
   }
+
   remove(data: T) {
     let index = this.indexOf(data)
     return this.removeAt(index)
   }
+
   removeAt(index: number) {
     if (index >= 0 && index < this.count) {
       let current = this.head
@@ -59,6 +64,7 @@ export class SinglyLinkedList<T> {
     }
     return undefined
   }
+
   indexOf(data: T) {
     let current = this.head
     for (let i = 0; i < this.size() && current != null; i++) {
@@ -69,15 +75,19 @@ export class SinglyLinkedList<T> {
     }
     return -1
   }
+
   isEmpty() {
     return this.size() === 0
   }
+
   size() {
     return this.count
   }
+
   getHead() {
     return this.head
   }
+  
   clear() {
     this.head = undefined
     this.count = 0
