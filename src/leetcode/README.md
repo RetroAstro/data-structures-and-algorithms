@@ -170,7 +170,7 @@ function mergeTwoLists(l1, l2) {
 
 ```js
 function reverseList(head) {
-  if (!head) return head
+  if (!head) return null
 
   let current = head
   let list = []
