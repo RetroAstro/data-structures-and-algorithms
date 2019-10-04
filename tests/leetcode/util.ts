@@ -2,9 +2,9 @@ import { Node } from '../../src/data-structures/linked-list/models'
 import { SinglyLinkedList } from '../../src/data-structures/linked-list/singly-linked-list'
 
 export function getLinkedList(array: number[]) {
-  let list = new SinglyLinkedList<number>()
-  array.forEach(item => list.push(item))
-  return list
+  let result = new SinglyLinkedList<number>()
+  array.forEach(item => result.push(item))
+  return result
 }
 
 export function output(node: Node<number>) {

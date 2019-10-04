@@ -151,3 +151,50 @@ function mergeTwoLists(l1, l2) {
 }
 ```
 
+**反转链表**
+
+反转一个单链表。
+
+示例：
+
+```js
+输入: 1->2->3->4->5->null
+输出: 5->4->3->2->1->null
+```
+
+思路：
+
+遍历链表，基于已有的每个节点创建新的节点，保存至数组 `list` 。以变量 `i` 记录遍历次数，`list[i - 1]` 即为上一个节点。
+
+代码：
+
+```js
+function reverseList(head) {
+  if (!head) return head
+
+  let current = head
+  let list = []
+  let i = 0
+
+  while (current.next != null) {
+    let node = factory(current.val)
+    if (i > 0) {
+      node.next = list[i - 1]
+    }
+    list.push(node)
+    i++
+    current = current.next
+  }
+
+  let res = factory(current.val)
+  res.next = list[list.length - 1]
+  return res
+  
+  function factory(val) {
+    return { val, next: null }
+  }
+}
+```
+
+
+
