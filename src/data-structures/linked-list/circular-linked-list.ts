@@ -24,7 +24,7 @@ export class CircularLinkedList<T> extends SinglyLinkedList<T> {
           node.next = this.head
         } else {
           node.next = current
-          current = this.getNodeAt(this.size() - 1) // untested
+          current = this.getNodeAt(this.size() - 1)
           this.head = node
           current.next = this.head
         }
