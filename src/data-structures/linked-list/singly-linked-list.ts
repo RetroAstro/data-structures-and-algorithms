@@ -9,10 +9,7 @@ export class SinglyLinkedList<T> {
     if (this.head == null) {
       this.head = node
     } else {
-      let current = this.head
-      while (current.next != null) {
-        current = current.next
-      }
+      let current = this.getNodeAt(this.size() - 1)
       current.next = node
     }
     this.count++
