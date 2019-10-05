@@ -196,5 +196,52 @@ function reverseList(head) {
 }
 ```
 
+**环形链表**
 
+给定一个链表，判断链表中是否有环。
+
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+
+示例：
+
+```js
+输入：head = [3,2,0,-4], pos = 1
+输出：true
+解释：链表中有一个环，其尾部连接到第二个节点。
+```
+
+```js
+输入：head = [1,2], pos = 0
+输出：true
+解释：链表中有一个环，其尾部连接到第一个节点。
+```
+
+```js
+输入：head = [1], pos = -1
+输出：false
+解释：链表中没有环。
+```
+
+思路：
+
+遍历链表，将对象作为字典，以链表节点对象中的 `node.val` 作为键名，链表节点对象作为键值，当字典中已缓存过相应的键值对时则证明该链表存在环。
+
+代码：
+
+```js
+function hasCycle(head) {
+  let current = head
+  let map = {}
+
+  while (current != null) {
+    if (map[current.data] && map[current.data] === current) {
+      return true
+    }
+    map[current.data] = current
+    current = current.next
+  }
+
+  return false
+}
+```
 
