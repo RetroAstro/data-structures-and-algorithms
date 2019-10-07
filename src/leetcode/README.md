@@ -283,3 +283,41 @@ function deleteNode(node) {
 }
 ```
 
+**回文链表**
+
+请判断一个链表是否为回文链表。
+
+示例：
+
+```js
+输入: 1->2
+输出: false
+```
+
+```js
+输入: 1->2->2->1
+输出: true
+```
+
+思路：
+
+遍历链表，用数组收集链表中节点的值，用 `reverse` 与 `join` 方法判断是否为回文。
+
+代码：
+
+```js
+function isPalindrome(head) {
+  let current = head
+  let list = []
+
+  while (current.next != null) {
+    list.push(current.data)
+    current = current.next
+  }
+
+  list.push(current.data)
+  
+  return [...list].reverse().join('') === list.join('')
+}
+```
+
