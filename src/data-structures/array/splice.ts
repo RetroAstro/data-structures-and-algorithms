@@ -6,7 +6,6 @@ export class spliceContainer extends Container {
     deleteCount: number = this._array.length,
     ...args: any[]
   ) {
-    // 处理边界情况
     if (start < 0) {
       start = (this._array.length + start < 0) ? 0 : (this._array.length + start)
     }

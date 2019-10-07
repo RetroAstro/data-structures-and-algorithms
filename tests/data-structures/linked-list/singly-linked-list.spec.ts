@@ -44,8 +44,6 @@ describe('singly-linked-list', () => {
 
   it('clear linked list', () => {
     let list = getLinkedList([1, 2, 3])
-    expect(list.getNodeAt(0).data).to.equal(1)
-    expect(list.getNodeAt(2).data).to.equal(3)
     list.clear()
     expect(list.isEmpty()).to.be.true
   })
