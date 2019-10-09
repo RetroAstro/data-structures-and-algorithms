@@ -431,3 +431,56 @@ class LRUCache {
 }
 ```
 
+**求众数**
+
+给定一个大小为 *n* 的数组，找到其中的众数。众数是指在数组中出现次数**大于** `n/2` 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+
+示例：
+
+```js
+输入: [3,2,3]
+输出: 3
+```
+
+```js
+输入: [2,2,1,1,1,2,2]
+输出: 2
+```
+
+思路：
+
+遍历数组记录相同元素出现次数，若次数有大于 `n/2` 的则返回。
+
+代码：
+
+```js
+function majorityElement(nums) {
+  let mark = Math.floor(nums.length / 2)
+  let map = {}
+
+  for (let i = 0; i < nums.length; i++) {
+    let key = nums[i]
+
+    if (map[key] !== undefined) {
+      map[key] = ++map[key]
+    } else {
+      map[key] = 1
+    }
+  }
+
+  let entries = Object.entries(map)
+
+  for (let i = 0; i < entries.length; i++) {
+    let [key, value] = entries[i]
+
+    if (value > mark) {
+      return Number(key)
+    }
+  }
+
+  return undefined
+}
+```
+
