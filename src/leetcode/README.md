@@ -321,3 +321,113 @@ function isPalindrome(head) {
 }
 ```
 
+**LRU 缓存机制**
+
+运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 `get` 和 写入数据 `put` 。
+
+获取数据 `get(key)` - 如果密钥 `(key)` 存在于缓存中，则获取密钥的值（总是正数），否则返回 -1。
+写入数据 `put(key, value)` - 如果密钥不存在，则写入其数据值。当缓存容量达到上限时，它应该在写入新数据之前删除最近最少使用的数据值，从而为新的数据值留出空间。
+
+示例：
+
+```js
+LRUCache cache = new LRUCache( 2 /* 缓存容量 */ )
+
+cache.put(1, 1)
+cache.put(2, 2)
+cache.get(1)       // 返回  1
+cache.put(3, 3)    // 该操作会使得密钥 2 作废
+cache.get(2)       // 返回 -1 (未找到)
+cache.put(4, 4)    // 该操作会使得密钥 1 作废
+cache.get(1)       // 返回 -1 (未找到)
+cache.get(3)       // 返回  3
+cache.get(4)       // 返回  4
+```
+
+思路：
+
+使用字典与双向链表结合来解此题，要注意 `get` 后移除链表中原节点，并将其移动到最新处，同时还要更新字典中的键值。`put` 时先判断字典中是否已经有缓存，有的话则先删除链表中的节点，再以新的键值生成最新的节点。若超过缓存容量大小，则先移除链表中最近最少使用的节点和其字典中的键值对，然后再进行下一步的操作。
+
+代码：
+
+```js
+class DoublyNode {
+  constructor(data) {
+    this.data = data
+    this.prev = null
+    this.next = null
+  }
+}
+
+class DoublyLinkedList {
+  constructor()
+    this.head = { data: '', prev: '', next: '' }
+    this.tail = { data: '', prev: '', next: '' }
+    this.head.next = this.tail
+    this.tail.prev = this.head
+    this.count = 0
+  }
+    
+  push(data) {
+    let node = new DoublyNode(data)
+    let previous = this.tail.prev
+    node.next = this.tail
+    previous.next = node
+    this.tail.prev = node
+    node.prev = previous
+    this.count++
+    return node
+  }
+
+  removeNode(node) {
+    let previous = node.prev
+    previous.next = node.next
+    node.next.prev = previous
+    this.count--
+  }
+
+  size() {
+    return this.count
+  }
+
+  getHead() {
+    return this.head
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.map = {}
+    this.capacity = capacity
+    this.list = new DoublyLinkedList()
+  }
+
+  get(key) {
+    if (this.map[key]) {
+      this.list.removeNode(this.map[key])
+      let node = this.list.push(this.map[key].data)
+      this.map[key] = node
+      return node.data.value
+    }
+    return -1
+  }
+
+  put(key, value) {
+    if (this.map[key]) {
+      this.list.removeNode(this.map[key])
+    } else {
+      if (
+        this.list.size() === this.capacity
+      ) {
+        let next = this.list.getHead().next
+        this.list.removeNode(next)
+        delete this.map[next.data.key]
+      }
+    }
+    let item = { key, value }
+    let node = this.list.push(item)
+    this.map[key] = node
+  }
+}
+```
+
