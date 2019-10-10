@@ -484,3 +484,54 @@ function majorityElement(nums) {
 }
 ```
 
+**有效的括号**
+
+给定一个只包括 ( ) { } [ ] 的字符串，判断字符串是否有效。
+
+有效字符串需满足：
+
+左括号必须用相同类型的右括号闭合。
+左括号必须以正确的顺序闭合。
+注意空字符串可被认为是有效字符串。
+
+示例：
+
+```js
+输入: "()[]{}"
+输出: true
+```
+
+```js
+输入: "([)]"
+输出: false
+```
+
+思路：
+
+用数组构造栈，将字符串 `split` 后推入栈，如果栈顶的两个字符满足括号闭合条件则出栈，若最后数组长度为 0 则该字符串有效。
+
+代码：
+
+```js
+function isValid(s) {
+  let arr = s.split('')
+  let matches = ['()', '{}', '[]']
+  let stack = []
+
+  for (var i = 0; i < arr.length; i++) {
+    stack.push(arr[i])
+
+    if (stack[stack.length - 1] && stack[stack.length - 2]) {
+      let str = stack[stack.length - 2] + stack[stack.length - 1]
+      
+      if (matches.includes(str)) {
+        stack.pop()
+        stack.pop()
+      }
+    }
+  }
+
+  return !stack.length
+}
+```
+
