@@ -60,9 +60,9 @@ describe('sequence-stack', () => {
 
   it('return if it is empty', () => {
     expect(stack.isEmpty()).to.equal(true)
-    stack.push(1);
+    stack.push(1)
     expect(stack.isEmpty()).to.equal(false)
-    stack.push(2);
+    stack.push(2)
     expect(stack.isEmpty()).to.equal(false)
     stack.push(3)
     expect(stack.isEmpty()).to.equal(false)
