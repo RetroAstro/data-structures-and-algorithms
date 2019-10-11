@@ -8,7 +8,7 @@ describe('singly-linked-list', () => {
     return result
   }
 
-  it('starts empty', () => {
+  it('start empty', () => {
     let list = getLinkedList([])
     expect(list.getHead()).to.be.undefined
     expect(list.size()).to.equal(0)
