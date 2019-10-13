@@ -595,3 +595,87 @@ function trap(height) {
 }
 ```
 
+**最小栈**
+
+设计一个支持 push，pop，top 操作，并能在常数时间内检索到最小元素的栈。
+
+push(x) -- 将元素 x 推入栈中。
+pop() -- 删除栈顶的元素。
+top() -- 获取栈顶元素。
+getMin() -- 检索栈中的最小元素。
+
+示例：
+
+```js
+let stack = new MinStack()
+stack.push(-2)
+stack.push(0)
+stack.push(-3)
+stack.getMin() // 返回 -3
+stack.pop()
+stack.top() // 返回 0
+stack.getMin() // 返回 -2
+```
+
+思路：
+
+创建辅助栈，在当前栈入栈时跟辅助栈顶元素比较，若较小则将元素推入辅助栈，在出栈时如果元素等于辅助栈顶元素，则辅助栈顶元素出栈。
+
+代码：
+
+```js
+class MinStack {
+  constructor() {
+    this.count = 0
+    this.items = {}
+    this.stack = new SequenceStack()
+  }
+  
+  push(data) {
+    this.items[this.count] = data
+    this.count++
+    this.put(data)
+  }
+
+  pop() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    this.count--
+    let result = this.items[this.count]
+    delete this.items[this.count]
+    this.take(result)
+    return result
+  }
+
+  top() {
+    if (this.isEmpty()) {
+      return undefined
+    }
+    return this.items[this.count - 1]
+  }
+
+  getMin() {
+    return this.stack.peek()
+  }
+
+  isEmpty() {
+    return this.count === 0
+  }
+
+  put(data) {
+    if (this.stack.isEmpty()) {
+      this.stack.push(data)
+    } else {
+      data <= this.stack.peek() ? this.stack.push(data) : null
+    }
+  }
+
+  take(data) {
+    if (data === this.stack.peek()) {
+      this.stack.pop()
+    }
+  }
+}
+```
+
