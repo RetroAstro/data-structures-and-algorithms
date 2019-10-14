@@ -1,0 +1,15 @@
+language: node_js
+sudo: false
+node_js:
+  - 10
+  - 9
+  - 8
+  - 7
+  - 6
+install:
+  - npm install
+script:
+  - npm test
+  - codecov -f coverage/*.json
+environment: 
+  - CODECOV_TOKEN="4403e0e3-2db3-46dc-8a7b-90f582d42109"

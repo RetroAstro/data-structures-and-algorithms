@@ -5,6 +5,7 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts tests/**/**/*.spec.ts",
+    "posttest": "nyc report --reporter=json",
     "coverage": "nyc npm run test"
   },
   "author": "RetroAstro",
@@ -14,6 +15,7 @@
     "@types/chai": "^4.2.2",
     "@types/mocha": "^5.2.7",
     "chai": "^4.2.0",
+    "codecov": "^3.6.1",
     "mocha": "^6.2.0",
     "nyc": "^14.1.1",
     "ts-node": "^8.4.1",
