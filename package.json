@@ -5,8 +5,8 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.json",
     "test": "mocha -r ts-node/register tests/**/*.spec.ts tests/**/**/*.spec.ts",
-    "posttest": "nyc report --reporter=json",
-    "coverage": "nyc npm run test"
+    "coverage": "nyc npm run test",
+    "postcoverage": "nyc report --reporter=json"
   },
   "author": "RetroAstro",
   "license": "MIT",
