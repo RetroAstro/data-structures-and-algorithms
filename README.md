@@ -71,3 +71,11 @@ splice 函数
 | 42 | 接雨水 | 困难 |
 | 155 | 最小栈 | 简单 |
 
+### Usage 
+
+```bash
+$ npm run coverage
+
+$ npm run build
+```
+
