@@ -74,8 +74,8 @@ splice 函数
 ### Usage 
 
 ```bash
-$ npm run coverage
+$ npm run coverage  # 运行测试
 
-$ npm run build
+$ npm run build     # 构建项目
 ```
 
