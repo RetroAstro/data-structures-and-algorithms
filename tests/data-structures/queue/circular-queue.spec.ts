@@ -50,6 +50,7 @@ describe('circular-queue', () => {
     expect(queue.dequeue()).to.equal(2)
     expect(queue.dequeue()).to.equal(3)
     expect(queue.dequeue()).to.equal(undefined)
+    expect(queue.peek()).to.equal(undefined)
   })
 
   it('allow to peek at the front data in the queue without dequeuing it', () => {

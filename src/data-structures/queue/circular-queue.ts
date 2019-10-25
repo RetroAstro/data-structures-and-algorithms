@@ -30,6 +30,9 @@ export class CircularQueue<T> {
   }
 
   peek() {
+    if (this.isEmpty()) {
+      return undefined
+    }
     return this.items[this.head]
   }
 
