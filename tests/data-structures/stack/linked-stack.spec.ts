@@ -48,14 +48,16 @@ describe('linked-stack', () => {
     stack.push(2)
     stack.push(3)
 
+    expect(stack.peek()).to.equal(3)
     stack.pop()
     expect(stack.size()).to.equal(2)
+    expect(stack.peek()).to.equal(2)
     stack.pop()
     expect(stack.size()).to.equal(1)
+    expect(stack.peek()).to.equal(1)
     stack.pop()
     expect(stack.size()).to.equal(0)
-    stack.pop()
-    expect(stack.size()).to.equal(0)
+    expect(stack.peek()).to.equal(undefined)
   })
 
   it('return if it is empty', () => {
