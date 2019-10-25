@@ -2,8 +2,11 @@ export class CircularQueue<T> {
   private head: number = 0
   private tail: number = 0
   private items: { [key: number]: T } = {}
+  private capacity: number
 
-  constructor(private capacity: number) {}
+  constructor(n: number) {
+    this.capacity = n + 1
+  }
 
   enqueue(data: T) {
     if (
