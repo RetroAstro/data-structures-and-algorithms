@@ -111,6 +111,59 @@ function threeSum(nums) {
 }
 ```
 
+**求众数**
+
+给定一个大小为 *n* 的数组，找到其中的众数。众数是指在数组中出现次数**大于** `n/2` 的元素。
+
+你可以假设数组是非空的，并且给定的数组总是存在众数。
+
+示例：
+
+```js
+输入: [3,2,3]
+输出: 3
+```
+
+```js
+输入: [2,2,1,1,1,2,2]
+输出: 2
+```
+
+思路：
+
+遍历数组记录相同元素出现次数，若次数有大于 `n/2` 的则返回。
+
+代码：
+
+```js
+function majorityElement(nums) {
+  let mark = Math.floor(nums.length / 2)
+  let map = {}
+
+  for (let i = 0; i < nums.length; i++) {
+    let key = nums[i]
+
+    if (map[key] !== undefined) {
+      map[key] = ++map[key]
+    } else {
+      map[key] = 1
+    }
+  }
+
+  let entries = Object.entries(map)
+
+  for (let i = 0; i < entries.length; i++) {
+    let [key, value] = entries[i]
+
+    if (value > mark) {
+      return Number(key)
+    }
+  }
+
+  return undefined
+}
+```
+
 **合并两个有序链表** 
 
 将两个有序链表合并为一个新的有序链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 
@@ -431,59 +484,6 @@ class LRUCache {
 }
 ```
 
-**求众数**
-
-给定一个大小为 *n* 的数组，找到其中的众数。众数是指在数组中出现次数**大于** `n/2` 的元素。
-
-你可以假设数组是非空的，并且给定的数组总是存在众数。
-
-示例：
-
-```js
-输入: [3,2,3]
-输出: 3
-```
-
-```js
-输入: [2,2,1,1,1,2,2]
-输出: 2
-```
-
-思路：
-
-遍历数组记录相同元素出现次数，若次数有大于 `n/2` 的则返回。
-
-代码：
-
-```js
-function majorityElement(nums) {
-  let mark = Math.floor(nums.length / 2)
-  let map = {}
-
-  for (let i = 0; i < nums.length; i++) {
-    let key = nums[i]
-
-    if (map[key] !== undefined) {
-      map[key] = ++map[key]
-    } else {
-      map[key] = 1
-    }
-  }
-
-  let entries = Object.entries(map)
-
-  for (let i = 0; i < entries.length; i++) {
-    let [key, value] = entries[i]
-
-    if (value > mark) {
-      return Number(key)
-    }
-  }
-
-  return undefined
-}
-```
-
 **有效的括号**
 
 给定一个只包括 ( ) { } [ ] 的字符串，判断字符串是否有效。
@@ -676,6 +676,51 @@ class MinStack {
       this.stack.pop()
     }
   }
+}
+```
+
+**完全平方数**
+
+给定正整数 *n*，找到若干个完全平方数（比如 `1, 4, 9, 16, ...`）使得它们的和等于 *n*。你需要让组成和的完全平方数的个数最少。
+
+示例：
+
+```js
+输入: n = 12
+输出: 3 
+解释: 12 = 4 + 4 + 4
+```
+
+```js
+输入: n = 13
+输出: 2
+解释: 13 = 4 + 9
+```
+
+思路：
+
+* 动态规划
+* 首先初始化长度为 `n+1` 的数组 `dp` ，每个位置都为 `0` 
+* 如果 `n` 为 `0` ，则结果为 `0` 
+* 对数组进行遍历，下标为 `i` ，每次都将当前数字先更新为最大的结果，即 `dp[i]=i` ，比如 `i=4` ，最坏结果为 `4=1+1+1+1` 即为 `4` 个数字
+* 动态转移方程为：`dp[i] = MIN(dp[i], dp[i - j * j] + 1)` ， `i` 表示当前数字，`j*j` 表示平方数
+* 时间复杂度：O(n*sqrt(n)) ，sqrt 为平方根
+
+代码：
+
+```js
+function numSquares(n) {
+  let dp = Array(n + 1).fill(0)
+  
+  for (let i = 1; i <= n; i++) {
+    dp[i] = i
+
+    for (let j = 1; i - j ** 2 >= 0; j++) {
+      dp[i] = Math.min(dp[i], dp[i - j ** 2] + 1)
+    }
+  }
+
+  return dp[n]
 }
 ```
 
