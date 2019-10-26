@@ -1,7 +1,7 @@
 import { SequenceQueue } from './sequence-queue'
 
 export function hotPotato(dataList: any[], num: number) {
-  let queue = new SequenceQueue<number>()
+  let queue = new SequenceQueue<string>()
   let elimitatedList = []
 
   for (let i = 0; i < dataList.length; i++) {
