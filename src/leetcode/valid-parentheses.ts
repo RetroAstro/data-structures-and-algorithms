@@ -3,7 +3,7 @@ export function isValid(s: string) {
   let matches = ['()', '{}', '[]']
   let stack = []
 
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     stack.push(arr[i])
 
     if (stack[stack.length - 1] && stack[stack.length - 2]) {

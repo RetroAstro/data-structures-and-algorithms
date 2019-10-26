@@ -7,7 +7,7 @@ export function twoSum(nums: number[], target: number) {
     if (obj[nums[i]] !== undefined) {
       return [obj[nums[i]], i]
     } else {
-      var key = target - nums[i]
+      let key = target - nums[i]
       obj[key] = i
     }
   }

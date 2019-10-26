@@ -2,7 +2,7 @@ export function threeSum(nums: number[]) {
   let result: any[] = []
   let map = <any>{}
 
-  for (var i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     twoSum(-nums[i], i)
   }
 
