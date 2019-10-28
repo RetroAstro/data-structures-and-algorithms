@@ -13,10 +13,10 @@ export function permutation(nums: number[]) {
       let temp = [...fixed]
       temp[temp.length] = num
       
-      let middle = recursive(temp, left.filter(item => item !== num))
+      let mids = recursive(temp, left.filter(item => item !== num))
 
-      if (middle.length === nums.length) {
-        result.push(middle as number[])
+      if (mids.length === nums.length) {
+        result.push(mids as number[])
       }
     })
   }
