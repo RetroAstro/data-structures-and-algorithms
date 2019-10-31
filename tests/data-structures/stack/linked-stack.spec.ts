@@ -32,6 +32,22 @@ describe('linked-stack', () => {
     expect(stack.pop()).to.equal(undefined)
   })
 
+  it('allow to peek data at the top in the stack', () => {
+    expect(stack.peek()).to.be.undefined
+    stack.push(1)
+    expect(stack.peek()).to.equal(1)
+    stack.push(2)
+    expect(stack.peek()).to.equal(2)
+    stack.push(3)
+    expect(stack.peek()).to.equal(3)
+    stack.pop()
+    expect(stack.peek()).to.equal(2)
+    stack.pop()
+    expect(stack.peek()).to.equal(1)
+    stack.pop()
+    expect(stack.peek()).to.be.undefined
+  })
+  
   it('return correct size', () => {
     expect(stack.size()).to.equal(0)
     stack.push(1)

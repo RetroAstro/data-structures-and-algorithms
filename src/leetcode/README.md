@@ -812,3 +812,139 @@ function dailyTemperatures(T) {
 }
 ```
 
+**用队列实现栈**
+
+使用队列实现栈的下列操作：
+
+* push(x) -- 元素 x 入栈
+* pop() -- 移除栈顶元素
+* peek() -- 获取栈顶元素
+* isEmpty() -- 返回栈是否为空
+
+思路：
+
+移除栈顶元素和获取栈顶元素时，让队列依次出队直到剩下一个元素，之后再将出队的所有元素再次入队。
+
+代码：
+
+```js
+class Stack {
+  constructor() {
+    this.queue = new Queue()
+  }
+
+  push(data) {
+    this.queue.enqueue(data)
+  }
+
+  pop() {
+    if (this.queue.isEmpty()) {
+      return undefined
+    }
+    let mids = []
+    while (this.queue.size() > 1) {
+      mids.push(this.queue.dequeue())
+    }
+    let result = this.queue.dequeue()
+    mids.forEach(item => this.queue.enqueue(item))
+    return result
+  }
+
+  peek() {
+    if (this.queue.isEmpty()) {
+      return undefined
+    }
+    let result
+    let mids = []
+    while (this.queue.size() > 0) {
+      if (this.queue.size() === 1) {
+        result = this.queue.peek()
+      }
+      mids.push(this.queue.dequeue())
+    }
+    mids.forEach(item => this.queue.enqueue(item))
+    return result
+  }
+
+  isEmpty() {
+    return this.queue.isEmpty()
+  }
+
+  size() {
+    return this.queue.size()
+  }
+
+  clear() {
+    this.queue.clear()
+  }
+}
+```
+
+**用栈实现队列**
+
+使用栈实现队列的下列操作：
+
+* enqueue(x) -- 将一个元素放入队列的尾部。
+* dequeue() -- 从队列首部移除元素。
+* peek() -- 返回队列首部的元素。
+* isEmpty() -- 返回队列是否为空。
+
+思路：
+
+使用两个栈来实现队列。
+
+代码：
+
+```js
+class Queue {
+  constructor() {
+    this.stackX = new Stack()
+    this.stackY = new Stack()
+  }
+
+  enqueue(data) {
+    this.stackX.push(data)
+  }
+  
+  dequeue() {
+    if (this.stackX.isEmpty()) {
+      return undefined
+    }
+    while (this.stackX.size() > 0) {
+      this.stackY.push(this.stackX.pop())
+    }
+    let result = this.stackY.pop()
+    while (this.stackY.size() > 0) {
+      this.stackX.push(this.stackY.pop())
+    }
+    return result
+  }
+
+  peek() {
+    if (this.stackX.isEmpty()) {
+      return undefined
+    }
+    while (this.stackX.size() > 0) {
+      this.stackY.push(this.stackX.pop())
+    }
+    let result = this.stackY.peek()
+    while (this.stackY.size() > 0) {
+      this.stackX.push(this.stackY.pop())
+    }
+    return result
+  }
+
+  isEmpty() {
+    return this.stackX.isEmpty()
+  }
+
+  size() {
+    return this.stackX.size()
+  }
+
+  clear() {
+    this.stackX.clear()
+  }
+}
+```
+

@@ -1,11 +1,11 @@
 import { expect } from 'chai'
-import { SequenceStack } from '../../../src/data-structures/stack/sequence-stack'
+import { Stack } from '../../src/leetcode/implement-stack-using-queues'
 
-describe('sequence-stack', () => {
-  let stack: SequenceStack<number>
+describe('implement-stack-using-queues', () => {
+  let stack: Stack<number>
 
   beforeEach(() => {
-    stack = new SequenceStack<number>()
+    stack = new Stack<number>()
   })
 
   it('start empty', () => {
