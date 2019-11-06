@@ -44,7 +44,6 @@ function dealPivot(array: number[], left: number, right: number) {
   if (array[left] > array[middle]) {
     swap(array, left, middle)
   }
-  if (middle !== right - 1) {
-    swap(array, middle, right - 1)
-  }
+  
+  swap(array, middle, right - 1)
 }
