@@ -20,15 +20,27 @@ export function testSortAlgorithm(algorithm: Function, name: string) {
       return array
     }
 
-    it('work with empty arrays', () => {
+    it('work with empty array', () => {
       expect(algorithm([])).to.deep.equal([])
     })
 
-    it('work with sorted arrays', () => {
+    it('work with 1 item in array', () => {
+      expect(algorithm([1])).to.deep.equal([1])
+    })
+
+    it('work with 2 items in array', () => {
+      expect(algorithm([2, 1])).to.deep.equal([1, 2])
+    })
+
+    it('work with 3 items in array', () => {
+      expect(algorithm([3, 2, 1])).to.deep.equal([1, 2, 3])
+    })
+
+    it('work with sorted array', () => {
       expect(algorithm(createSortedArray())).to.deep.equal(createSortedArray())
     })
 
-    it('work with non-sorted arrays', () => {
+    it('work with non-sorted array', () => {
       let array = algorithm(createNonSortedArray())
       expect(array).to.deep.equal(createSortedArray())
 

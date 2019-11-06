@@ -1,3 +1,5 @@
+import { swap } from './swap'
+
 export function bubbleSort(array: number[]) {
   let { length } = array
   
@@ -5,7 +7,7 @@ export function bubbleSort(array: number[]) {
     let flag = false
     for (let j = 0; j < length - i - 1; j++) {
       if (array[j] > array[j + 1]) {
-        [array[j], array[j + 1]] = [array[j + 1], array[j]]
+        swap(array, j, j + 1)
         flag = true
       }
     }

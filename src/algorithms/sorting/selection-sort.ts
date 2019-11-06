@@ -1,3 +1,5 @@
+import { swap } from './swap'
+
 export function selectionSort(array: number[]) {
   let { length } = array
   
@@ -9,7 +11,7 @@ export function selectionSort(array: number[]) {
       }
     }
     if (i !== min) {
-      [array[i], array[min]] = [array[min], array[i]]
+      swap(array, i, min)
     }
   }
 
