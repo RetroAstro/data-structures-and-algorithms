@@ -4,7 +4,7 @@ export function binarySearchRecursive(array: number[], target: number) {
   function recursive(array: number[], target: number, low: number, high: number): number {
     if (low > high) return -1
 
-    let mid = Math.floor((low + high) / 2)
+    let mid = low + ((high - low) >> 1)
 
     if (target === array[mid]) {
       return mid
