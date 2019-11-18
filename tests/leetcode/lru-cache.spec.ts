@@ -13,5 +13,6 @@ describe('lru-cache', () => {
     expect(cache.get(1)).to.equal(-1)
     expect(cache.get(3)).to.equal(3)
     expect(cache.get(4)).to.equal(4)
+    expect(cache.put(3, 3)).to.be.undefined
   })
 })
