@@ -68,7 +68,7 @@ export class HashTableSeperateChaining<K, V> {
 
   private getEntry(key: K, list: SinglyLinkedList<Entry<K, V>>) {
     let current = list.getHead()
-    for (let i = 0; i < list.size() && current != null; i++) {
+    while (current != null) {
       if (current.data.key === key) {
         return current.data
       }

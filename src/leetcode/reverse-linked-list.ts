@@ -5,7 +5,7 @@ export function reverseList(head: Node<number>) {
   let list = []
   let i = 0
 
-  while (current.next != null) {
+  while (current != null) {
     let node = factory(current.data)
     if (i > 0) {
       node.next = list[i - 1]
@@ -15,9 +15,7 @@ export function reverseList(head: Node<number>) {
     current = current.next
   }
 
-  let res = factory(current.data)
-  res.next = list[list.length - 1]
-  return res
+  return list[list.length - 1]
   
   function factory<T>(data: T): Node<T> {
     return { data, next: null }
