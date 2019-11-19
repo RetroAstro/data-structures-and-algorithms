@@ -25,7 +25,7 @@ export class HashTableSeperateChaining<K, V> {
     let list = this.table[this.hashCode(key)]
     if (list && !list.isEmpty()) {
       let entry = this.getEntry(key, list)
-      return entry.value
+      return entry ? entry.value : undefined
     }
     return undefined
   }
@@ -50,7 +50,7 @@ export class HashTableSeperateChaining<K, V> {
 
   size() {
     return Object.values(this.table)
-      .map(list => list.size()).reduce((prev, next) => prev + next)
+      .map(list => list.size()).reduce((prev, next) => prev + next, 0)
   }
 
   clear() {
@@ -59,11 +59,15 @@ export class HashTableSeperateChaining<K, V> {
 
   hashCode(key: K) {
     let tableKey = toStr(key)
-    let hash = 5381
+    let hash = 0
     for (let i = 0; i < tableKey.length; i++) {
-      hash = (hash * 33) + tableKey.charCodeAt(i)
+      hash += tableKey.charCodeAt(i) 
     }
-    return hash % 1013
+    return hash % 37
+  }
+
+  getList(key: K) {
+    return this.table[this.hashCode(key)]
   }
 
   private getEntry(key: K, list: SinglyLinkedList<Entry<K, V>>) {
