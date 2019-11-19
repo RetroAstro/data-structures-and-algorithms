@@ -223,14 +223,12 @@ function mergeTwoLists(l1, l2) {
 
 ```js
 function reverseList(head) {
-  if (!head) return null
-
   let current = head
   let list = []
   let i = 0
 
-  while (current.next != null) {
-    let node = factory(current.val)
+  while (current != null) {
+    let node = factory(current.data)
     if (i > 0) {
       node.next = list[i - 1]
     }
@@ -239,12 +237,10 @@ function reverseList(head) {
     current = current.next
   }
 
-  let res = factory(current.val)
-  res.next = list[list.length - 1]
-  return res
+  return list[list.length - 1]
   
-  function factory(val) {
-    return { val, next: null }
+  function factory(data) {
+    return { data, next: null }
   }
 }
 ```
@@ -363,13 +359,11 @@ function isPalindrome(head) {
   let current = head
   let list = []
 
-  while (current.next != null) {
+  while (current != null) {
     list.push(current.data)
     current = current.next
   }
 
-  list.push(current.data)
-  
   return [...list].reverse().join('') === list.join('')
 }
 ```
@@ -996,6 +990,50 @@ class KthLargest {
 
     return array[array.length - this.k]
   }
+}
+```
+
+**X 的平方根**
+
+计算并返回 *x* 的平方根，其中 *x* 是非负整数。
+
+示例：
+
+```js
+输入: 4
+输出: 2
+```
+
+```js
+输入: 8
+输出: 2
+说明: 8 的平方根是 2.82842..., 由于返回类型是整数，小数部分将被舍去。
+```
+
+思路：
+
+二分查找最基本的模版
+
+代码：
+
+```js
+function mySqrt(x) {
+  let low = 0
+  let high = x
+
+  while (low <= high) {
+    let mid = low + ((high - low) >> 1)
+
+    if (mid ** 2 === x) {
+      return mid
+    } else if (mid ** 2 > x) {
+      high = mid - 1
+    } else {
+      low = mid + 1
+    }
+  }
+
+  return high
 }
 ```
 
