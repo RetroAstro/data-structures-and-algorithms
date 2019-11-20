@@ -25,7 +25,9 @@ export class HashTableSeperateChaining<K, V> {
     let list = this.table[this.hashCode(key)]
     if (list && !list.isEmpty()) {
       let entry = this.getEntry(key, list)
-      return entry ? entry.value : undefined
+      if (entry) {
+        return entry.value
+      }
     }
     return undefined
   }
@@ -35,11 +37,13 @@ export class HashTableSeperateChaining<K, V> {
     let list = this.table[position]
     if (list && !list.isEmpty()) {
       let entry = this.getEntry(key, list)
-      list.remove(entry)
-      if (list.isEmpty()) {
-        delete this.table[position]
+      if (entry) {
+        list.remove(entry)
+        if (list.isEmpty()) {
+          delete this.table[position]
+        }
+        return true
       }
-      return true
     }
     return false
   }

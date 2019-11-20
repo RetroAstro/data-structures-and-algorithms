@@ -175,16 +175,19 @@ describe('hash-table-seperate-chaining', () => {
     expect(table.getList(C).size()).to.equal(3)
 
     expect(table.remove(a)).to.be.true
+    expect(table.remove(a)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.equal(b)
     expect(table.get(c)).to.equal(c)
 
     expect(table.remove(b)).to.be.true
+    expect(table.remove(b)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.be.undefined
     expect(table.get(c)).to.equal(c)
 
     expect(table.remove(c)).to.be.true
+    expect(table.remove(c)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.be.undefined
     expect(table.get(c)).to.be.undefined
