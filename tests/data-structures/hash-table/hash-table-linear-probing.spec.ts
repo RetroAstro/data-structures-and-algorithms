@@ -1,14 +1,14 @@
 import { expect } from 'chai'
-import { HashTableSeperateChaining } from '../../../src/data-structures/hash-table/hash-table-seperate-chaining'
+import { HashTableLinearProbling } from '../../../src/data-structures/hash-table/hash-table-linear-probing'
 import { MyObj } from './my-obj'
 
-describe('hash-table-seperate-chaining', () => {
+describe('hash-table-linear-probing', () => {
   const A = 'Jonathan'
   const B = 'Jamie'
   const C = 'Sue'
 
   it('start empty', () => {
-    let table = new HashTableSeperateChaining<number, number>()
+    let table = new HashTableLinearProbling<number, number>()
     expect(table.size()).to.equal(0)
     expect(table.isEmpty()).to.be.true
   })
@@ -16,13 +16,13 @@ describe('hash-table-seperate-chaining', () => {
   it('generate hashcode', () => {
     let table: any
     // number
-    table = new HashTableSeperateChaining<number, number>()
+    table = new HashTableLinearProbling<number, number>()
     expect(table.hashCode(1)).to.equal(12)
     expect(table.hashCode(10)).to.equal(23)
     expect(table.hashCode(100)).to.equal(34)
     expect(table.hashCode(1000)).to.equal(8)
     // string
-    table = new HashTableSeperateChaining<string, number>()
+    table = new HashTableLinearProbling<string, number>()
     expect(table.hashCode('1')).to.equal(12)
     expect(table.hashCode('10')).to.equal(23)
     expect(table.hashCode('100')).to.equal(34)
@@ -31,7 +31,7 @@ describe('hash-table-seperate-chaining', () => {
     expect(table.hashCode('Bb')).to.equal(16)
     expect(table.hashCode('Cc')).to.equal(18)
     // object
-    table = new HashTableSeperateChaining<MyObj, MyObj>()
+    table = new HashTableLinearProbling<MyObj, MyObj>()
     let objs = []
     for (let i = 1; i < 5; i++) {
       objs.push(new MyObj(i, i + 1))
@@ -43,7 +43,7 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   it('put undefined and null keys and values', () => {
-    let table = new HashTableSeperateChaining<string, number>()
+    let table = new HashTableLinearProbling<string, number>()
 
     expect(table.put('undefined', undefined)).to.equal(false)
     expect(table.get('undefined')).to.equal(undefined)
@@ -77,7 +77,7 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   it('put values with number key without collisions', () => {
-    let table = new HashTableSeperateChaining<number, number>()
+    let table = new HashTableLinearProbling<number, number>()
     expect(table.put(1, 1)).to.be.true
     expect(table.put(2, 2)).to.be.true
     expect(table.put(3, 3)).to.be.true
@@ -91,7 +91,7 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   it('put values with string key without collisions', () => {
-    let table = new HashTableSeperateChaining<string, number>()
+    let table = new HashTableLinearProbling<string, number>()
     expect(table.put('1', 1)).to.be.true
     expect(table.put('10', 10)).to.be.true
     expect(table.put('100', 100)).to.be.true
@@ -103,7 +103,7 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   it('put values with object key without collisions', () => {
-    let table = new HashTableSeperateChaining<MyObj, MyObj>()
+    let table = new HashTableLinearProbling<MyObj, MyObj>()
     let objs = []
     for (let i = 1; i < 5; i++) {
       let item = new MyObj(i, i + 1)
@@ -117,31 +117,30 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   it('test hashcode collisions', () => {
-    let table = new HashTableSeperateChaining<string, number>()
+    let table = new HashTableLinearProbling<string, number>()
     expect(table.hashCode(A)).to.equal(5)
     expect(table.hashCode(B)).to.equal(5)
     expect(table.hashCode(C)).to.equal(5)
   })
 
-  it('put values with collisions', () => {
-    let table = new HashTableSeperateChaining<string, string>()
+  it('put values with with collisions', () => {
+    let table = new HashTableLinearProbling<string, string>()
     expect(table.put(A, A)).to.be.true
+    expect(table.size()).to.equal(1)
     expect(table.get(A)).to.equal(A)
-    expect(table.getList(A).size()).to.equal(1)
     expect(table.put(B, B)).to.be.true
+    expect(table.size()).to.equal(2)
     expect(table.get(B)).to.equal(B)
-    expect(table.getList(B).size()).to.equal(2)
     expect(table.put(C, C)).to.be.true
+    expect(table.size()).to.equal(3)
     expect(table.get(C)).to.equal(C)
-    expect(table.getList(C).size()).to.equal(3)
-    let head = table.getList(A).getHead()
-    expect(head.data.value).to.equal(A)
-    expect(head.next.data.value).to.equal(B)
-    expect(head.next.next.data.value).to.equal(C)
+    expect(table.getEntry(table.hashCode(A)).value).to.equal(A)
+    expect(table.getEntry(table.hashCode(A) + 1).value).to.equal(B)
+    expect(table.getEntry(table.hashCode(A) + 2).value).to.equal(C)
   })
 
   it('remove elements without collisions', () => {
-    let table = new HashTableSeperateChaining<number, number>()
+    let table = new HashTableLinearProbling<number, number>()
     table.put(1, 1)
     table.put(2, 2)
     table.put(3, 3)
@@ -172,31 +171,67 @@ describe('hash-table-seperate-chaining', () => {
   })
 
   function removeWithCollision(a: string, b: string, c: string) {
-    let table = new HashTableSeperateChaining<string, string>()
+    let table = new HashTableLinearProbling<string, string>()
 
+    expect(table.hashCode(')')).to.equal(4)
+    expect(table.hashCode('+')).to.equal(6)
+    expect(table.hashCode(',')).to.equal(7)
+    expect(table.hashCode('-')).to.equal(8)
+    expect(table.hashCode('0')).to.equal(11)
+
+    expect(table.put(')', ')')).to.be.true
+    expect(table.size()).to.equal(1)
     expect(table.put(A, A)).to.be.true
-    expect(table.getList(A).size()).to.equal(1)
+    expect(table.size()).to.equal(2)
+    expect(table.put('+', '+')).to.be.true
+    expect(table.size()).to.equal(3)
     expect(table.put(B, B)).to.be.true
-    expect(table.getList(B).size()).to.equal(2)
+    expect(table.size()).to.equal(4)
+    expect(table.put(',', ',')).to.be.true
+    expect(table.size()).to.equal(5)
     expect(table.put(C, C)).to.be.true
-    expect(table.getList(C).size()).to.equal(3)
+    expect(table.size()).to.equal(6)
+    expect(table.put('-', '-')).to.be.true
+    expect(table.size()).to.equal(7)
+    expect(table.put('0', '0')).to.be.true
+    expect(table.size()).to.equal(8)
+
+    expect(table.getEntry(4).key).to.equal(')')
+    expect(table.getEntry(5).key).to.equal(A)
+    expect(table.getEntry(6).key).to.equal('+')
+    expect(table.getEntry(7).key).to.equal(B)
+    expect(table.getEntry(8).key).to.equal(',')
+    expect(table.getEntry(9).key).to.equal(C)
+    expect(table.getEntry(10).key).to.equal('-')
+    expect(table.getEntry(11).key).to.equal('0')
 
     expect(table.remove(a)).to.be.true
     expect(table.remove(a)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.equal(b)
     expect(table.get(c)).to.equal(c)
+    verifyOtherKeys(table)
 
     expect(table.remove(b)).to.be.true
     expect(table.remove(b)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.be.undefined
     expect(table.get(c)).to.equal(c)
+    verifyOtherKeys(table)
 
     expect(table.remove(c)).to.be.true
     expect(table.remove(c)).to.be.false
     expect(table.get(a)).to.be.undefined
     expect(table.get(b)).to.be.undefined
     expect(table.get(c)).to.be.undefined
+    verifyOtherKeys(table)
+  }
+
+  function verifyOtherKeys(table: HashTableLinearProbling<string, string>) {
+    expect(table.get(')')).to.equal(')')
+    expect(table.get('+')).to.equal('+')
+    expect(table.get(',')).to.equal(',')
+    expect(table.get('-')).to.equal('-')
+    expect(table.get('0')).to.equal('0')
   }
 })
