@@ -33,13 +33,13 @@ export class BinaryTreeTraverse<T> {
     if (node == null) return
     this.queue.enqueue(node)
     while (!this.queue.isEmpty()) {
-      let current = this.queue.dequeue()
-      res.push(current.data)
-      if (current.left) {
-        this.queue.enqueue(current.left)
+      let temp = this.queue.dequeue()
+      res.push(temp.data)
+      if (temp.left) {
+        this.queue.enqueue(temp.left)
       }
-      if (current.right) {
-        this.queue.enqueue(current.right)
+      if (temp.right) {
+        this.queue.enqueue(temp.right)
       }
     }
   }
