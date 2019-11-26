@@ -1,4 +1,6 @@
-import { Node } from './node'
+import { Node, Parent } from './node'
+
+type union = 'left' | 'right'
 
 export class BinarySearchTree<T> {
   private root: Node<T>
@@ -12,12 +14,14 @@ export class BinarySearchTree<T> {
         if (data > current.data) {
           if (current.right == null) {
             current.right = new Node<T>(data)
+            current.right.parent = new Parent<T>(current, 'right')
             return
           }
           current = current.right
         } else {
           if (current.left == null) {
             current.left = new Node<T>(data)
+            current.left.parent = new Parent<T>(current, 'left')
             return
           }
           current = current.left
@@ -26,35 +30,32 @@ export class BinarySearchTree<T> {
     }
   }
 
-  remove(data: T, node: Node<T> = this.root) {
+  remove(data: T) {
+    let node = this.search(data)
     if (node == null) {
-      return null
+      return
     }
-    if (data > node.data) {
-      node.right = this.remove(data, node.right)
-      return node
-    } else if (data < node.data) {
-      node.left = this.remove(data, node.left)
-      return node
-    } else {
+    if (node.parent) {
+      let path = node.parent.path as union
       // case1
       if (node.left == null && node.right == null) {
-        node = null
-        return node
+        node.parent.node[path] = null
+        return
       }
       // case2
       if (node.left == null) {
-        node = node.right
-        return node
+        node.parent.node[path] = node.right
+        return
       } else if (node.right == null) {
-        node = node.left
-        return node
+        node.parent.node[path] = node.left
+        return
       }
-      // case3
+    }
+    // case3
+    if (node.right) {
       let temp = this.findMin(node.right)
       node.data = temp.data
-      node.right = this.remove(temp.data, node.right)
-      return node
+      temp.parent.node[temp.parent.path as union] = null
     }
   }
 
@@ -88,11 +89,44 @@ export class BinarySearchTree<T> {
     return current
   }
 
-  findPred() {
-
+  findPred(data: T) {
+    let node = this.search(data)
+    if (node == null) {
+      return undefined
+    }
+    if (node.left || node.parent == null) {
+      return this.findMax(node.left)
+    }
+    if (node.parent.path == 'right') {
+      return node.parent.node
+    } else {
+      return this.findParent('right', node)
+    }
   }
 
-  findSucc() {
+  findSucc(data: T) {
+    let node = this.search(data)
+    if (node == null) {
+      return undefined
+    }
+    if (node.right || node.parent == null) {
+      return this.findMin(node.right)
+    }
+    if (node.parent.path == 'left') {
+      return node.parent.node
+    } else {
+      return this.findParent('left', node)
+    }
+  }
 
+  private findParent(path: string, node: Node<T>) {
+    let current = node
+    while (current && current.parent) {
+      if (current.parent.path == path) {
+        return current.parent
+      }
+      current = current.parent.node
+    }
+    return undefined
   }
 }
