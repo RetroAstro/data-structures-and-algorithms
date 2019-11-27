@@ -45,9 +45,11 @@ export class BinarySearchTree<T> {
       // case2
       if (node.left == null) {
         node.parent.node[path] = node.right
+        node.right.parent = node.parent
         return
       } else if (node.right == null) {
         node.parent.node[path] = node.left
+        node.left.parent = node.parent
         return
       }
     }
@@ -56,6 +58,11 @@ export class BinarySearchTree<T> {
       let temp = this.findMin(node.right)
       node.data = temp.data
       temp.parent.node[temp.parent.path as union] = null
+    } else {
+      if (node.left && node.left.parent) {
+        node.left.parent = null
+      }
+      this.root = node.left
     }
   }
 
@@ -119,11 +126,15 @@ export class BinarySearchTree<T> {
     }
   }
 
+  getRoot() {
+    return this.root
+  }
+
   private findParent(path: string, node: Node<T>) {
     let current = node
     while (current && current.parent) {
       if (current.parent.path == path) {
-        return current.parent
+        return current.parent.node
       }
       current = current.parent.node
     }

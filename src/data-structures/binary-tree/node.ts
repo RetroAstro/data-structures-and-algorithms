@@ -1,6 +1,6 @@
 export class Node<T> {
-  left: Node<T>
-  right: Node<T>
+  left: Node<T> = null
+  right: Node<T> = null
   parent?: Parent<T>
   
   constructor(public data: T) {}
