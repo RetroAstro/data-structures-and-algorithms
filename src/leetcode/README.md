@@ -1037,3 +1037,61 @@ function mySqrt(x) {
 }
 ```
 
+**二叉树的层次遍历**
+
+给定一个二叉树，返回其按层次遍历的节点值。 （即逐层地，从左到右访问所有节点）。
+
+示例：
+
+```js
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+返回其层次遍历结果
+
+```js
+[
+  [3],
+  [9,20],
+  [15,7]
+]
+```
+
+思路：
+
+广度优先搜索 ( BFS )
+
+* 使用队列存放每一层的节点, 然后在循环中记录值, 并且把子节点添加进去
+* 外循环负责遍历层级结构, 内循环负责遍历每一层的子节点
+* 最后把 `temp` 下一层的节点, 再赋给 `queue` , 直到 `queue` 为空则表示全部遍历完毕
+
+代码：
+
+```js
+function levelOrder(root) {
+  if (!root) return []
+  let result = []
+  let queue = [root]
+  while (queue.length) {
+    let arr = [], temp = []
+    while (queue.length) {
+      let node = queue.shift()
+      arr.push(node.data)
+      if (node.left) {
+        temp.push(node.left)
+      }
+      if (node.right) {
+        temp.push(node.right)
+      }
+    }
+    queue = temp
+    result.push(arr)
+  }
+  return result
+}
+```
+
