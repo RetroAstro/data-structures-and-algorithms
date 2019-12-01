@@ -25,7 +25,7 @@ function twoSum(nums, target) {
     if (obj[nums[i]] !== undefined) {
       return [obj[nums[i]], i]
     } else {
-      var key = target - nums[i]
+      let key = target - nums[i]
       obj[key] = i
     }
   }
@@ -512,7 +512,7 @@ function isValid(s) {
   let matches = ['()', '{}', '[]']
   let stack = []
 
-  for (var i = 0; i < arr.length; i++) {
+  for (let i = 0; i < arr.length; i++) {
     stack.push(arr[i])
 
     if (stack[stack.length - 1] && stack[stack.length - 2]) {
