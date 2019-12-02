@@ -14,8 +14,13 @@ function insertNodes<T>(array: T[], tree: BinarySearchTree<T>) {
 }
 
 describe('binary-search-tree', () => {
+  let tree: BinarySearchTree<number>
+
+  beforeEach(() => {
+    tree = new BinarySearchTree<number>()
+  })
+
   it('start empty', () => {
-    let tree = new BinarySearchTree<number>()
     expect(tree.getRoot()).to.be.undefined
     expect(tree.search(1)).to.be.undefined
     expect(tree.findPred(1)).to.be.undefined
@@ -25,7 +30,6 @@ describe('binary-search-tree', () => {
   })
 
   it('insert nodes', () => {
-    let tree = new BinarySearchTree<number>()
     tree.insert(33)
     expect(inOrderTraverse(tree)).to.deep.equal([33])
     tree.insert(16)
@@ -59,7 +63,6 @@ describe('binary-search-tree', () => {
   })
 
   it('remove nodes', () => {
-    let tree = new BinarySearchTree<number>()
     insertNodes([33, 16, 50, 13, 18, 34, 58, 15, 17, 25, 51, 66, 19, 27, 55], tree)
     tree.remove(33)
     expect(inOrderTraverse(tree)).to.deep.equal([13, 15, 16, 17, 18, 19, 25, 27, 34, 50, 51, 55, 58, 66])
@@ -95,19 +98,16 @@ describe('binary-search-tree', () => {
   })
 
   it('find max node', () => {
-    let tree = new BinarySearchTree<number>()
     insertNodes([33, 16, 50, 13, 18, 34, 58, 15, 17, 25, 51, 66, 19, 27, 55], tree)
     expect(tree.findMax().data).to.equal(66)
   })
 
   it('find min node', () => {
-    let tree = new BinarySearchTree<number>()
     insertNodes([33, 16, 50, 13, 18, 34, 58, 15, 17, 25, 51, 66, 19, 27, 55], tree)
     expect(tree.findMin().data).to.equal(13)
   })
 
   it('find pred node', () => {
-    let tree = new BinarySearchTree<number>()
     insertNodes([33, 16, 50, 13, 18, 34, 58, 15, 17, 25, 51, 66, 19, 27, 55], tree)
     expect(tree.findPred(33).data).to.equal(27)
     expect(tree.findPred(16).data).to.equal(15)
@@ -127,7 +127,6 @@ describe('binary-search-tree', () => {
   })
 
   it('find succ node', () => {
-    let tree = new BinarySearchTree<number>()
     insertNodes([33, 16, 50, 13, 18, 34, 58, 15, 17, 25, 51, 66, 19, 27, 55], tree)
     expect(tree.findSucc(33).data).to.equal(34)
     expect(tree.findSucc(16).data).to.equal(17)

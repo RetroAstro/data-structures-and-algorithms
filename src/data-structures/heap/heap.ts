@@ -33,31 +33,32 @@ export class MinHeap<T> {
     return this.isEmpty() ? undefined : this.heap[0]
   }
 
+  getHeap() {
+    return this.heap
+  }
+
   siftUp(index: number) {
     let parent = this.getParentIndex(index)
-    if (index > 0 && compare(this.heap[index], this.heap[parent]) === Compare.lt) {
+    if (index > 0 && this.compareFn(this.heap[index], this.heap[parent]) === Compare.lt) {
       swap(this.heap, parent, index)
       this.siftUp(parent)
     }
   }
 
   siftDown(index: number) {
+    let temp = index
     let left = this.getLeftIndex(index)
     let right = this.getRightIndex(index)
-    let temp = compare(this.heap[left], this.heap[right]) === Compare.lt ? left : right
-    if (right < this.size() && compare(this.heap[temp], this.heap[index]) === Compare.lt) {
+    if (left < this.size() && this.compareFn(this.heap[temp], this.heap[left]) === Compare.gt) {
+      temp = left
+    }
+    if (right < this.size() && this.compareFn(this.heap[temp], this.heap[right]) === Compare.gt) {
+      temp = right
+    }
+    if (temp !== index) {
       swap(this.heap, temp, index)
       this.siftDown(temp)
     }
-  }
-
-  heapify(array: T[]) {
-    this.heap = array
-    let maxIndex = Math.floor(this.size() / 2) - 1
-    for (let i = 0; i <= maxIndex; i++) {
-      this.siftDown(i)
-    }
-    return this.heap
   }
 
   isEmpty() {
