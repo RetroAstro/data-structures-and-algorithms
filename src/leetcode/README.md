@@ -1095,3 +1095,33 @@ function levelOrder(root) {
 }
 ```
 
+**二叉树的最大深度**
+
+给定一个二叉树，找出其最大深度。
+
+二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。
+
+示例：`[3,9,20,null,null,15,7]` 
+
+```js
+    3
+   / \
+  9  20
+    /  \
+   15   7
+```
+
+返回最大深度 3
+
+思路：
+
+递归求解。
+
+代码：
+
+```js
+function maxDepth(root) {
+  return root ? Math.max(maxDepth(root.left), maxDepth(root.right)) + 1 : 0
+}
+```
+

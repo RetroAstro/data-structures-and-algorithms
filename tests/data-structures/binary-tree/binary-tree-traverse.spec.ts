@@ -2,7 +2,7 @@ import { expect } from 'chai'
 import { Node } from '../../../src/data-structures/binary-tree/node'
 import { BinaryTreeTraverse } from '../../../src/data-structures/binary-tree/binary-tree-traverse'
 
-function createBinaryTree<T>(array: T[], index: number = 0) {
+export function createBinaryTree<T>(array: T[], index: number = 0) {
   let treeNode: Node<T> = null
   if (index < array.length) {
     treeNode = new Node<T>(array[index])
