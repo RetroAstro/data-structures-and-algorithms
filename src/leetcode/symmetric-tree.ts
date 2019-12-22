@@ -52,6 +52,6 @@ function isSymmetricIterative<T>(root: Node<T>) {
   return true
 }
 
-function isSymmetricRecursive<T>(root: Node<T>) {
-
+function isSymmetricRecursive() {
+  
 }
