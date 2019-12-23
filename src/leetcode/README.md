@@ -1125,3 +1125,103 @@ function maxDepth(root) {
 }
 ```
 
+**对称二叉树**
+
+给定一个二叉树，检查它是否是镜像对称的。
+
+例如，二叉树 `[1,2,2,3,4,4,3]` 是对称的。
+
+```js
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+```
+
+但是下面这个 `[1,2,2,null,3,null,3]` 则不是镜像对称的:
+
+```js
+    1
+   / \
+  2   2
+   \   \
+   3    3
+```
+
+递归版思路：
+
+递归结束条件：
+
+都为空指针则返回 true，只有一个为空则返回 false 。
+
+递归过程：
+
+* 判断两个指针当前节点值是否相等
+* 判断 A 的右子树与 B 的左子树是否对称
+* 判断 A 的左子树与 B 的右子树是否对称
+
+短路：在递归判断过程中存在短路现象，也就是做 与 操作时，如果前面的值返回 false 则后面的不再进行计算。
+
+时间复杂度：O(n) 
+
+代码：
+
+```js
+function isSymmetricRecursive(root) {
+  return isMirror(root, root)
+
+  function isMirror(t1, t2) {
+    if (t1 == null && t2 == null) return true
+    if (t1 == null || t2 == null) return false
+
+    return t1.data == t2.data && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+  }
+}
+```
+
+迭代版思路：
+
+层次遍历二叉树，每层维护一个数组，数组中的元素为 `{ key: 'left', node: node.left, parent: node }` ，创建两个指针从数组两边向中间比较，当出现 `temp[i].key == temp[j].key || temp[i].node.data != temp[j].node.data || temp[i].parent.data != temp[j].parent.data` 时则不满足对称二叉树的条件。
+
+代码：
+
+```js
+function isSymmetricIterative(root) {
+  if (!root) return true
+  let queue = [root]
+  while (queue.length) {
+    let temp = []
+    while (queue.length) {
+      let node = queue.shift()
+      if (node.left) {
+        temp.push({ key: 'left', node: node.left, parent: node })
+      }
+      if (node.right) {
+        temp.push({ key: 'right', node: node.right, parent: node })
+      }
+    }
+    if (temp.length % 2 == 0) {
+      let i = 0, j = temp.length - 1
+      while (i < j) {
+        if (
+          temp[i].key == temp[j].key
+          ||
+          temp[i].node.data != temp[j].node.data
+          ||
+          temp[i].parent.data != temp[j].parent.data
+        ) {
+          return false
+        }
+        i++
+        j--
+      }
+    } else {
+      return false
+    }
+    queue = temp.map(item => item.node)
+  }
+  return true
+}
+```
+

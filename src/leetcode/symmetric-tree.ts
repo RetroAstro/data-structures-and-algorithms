@@ -52,6 +52,13 @@ function isSymmetricIterative<T>(root: Node<T>) {
   return true
 }
 
-function isSymmetricRecursive() {
-  
+function isSymmetricRecursive<T>(root: Node<T>) {
+  return isMirror(root, root)
+
+  function isMirror<K extends Node<T>>(t1: K, t2: K): boolean {
+    if (t1 == null && t2 == null) return true
+    if (t1 == null || t2 == null) return false
+
+    return t1.data == t2.data && isMirror(t1.left, t2.right) && isMirror(t1.right, t2.left)
+  }
 }
