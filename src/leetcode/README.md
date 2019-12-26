@@ -1271,3 +1271,51 @@ function isSymmetricIterative(root) {
 }
 ```
 
+**两数相加**
+
+示例：
+
+```js
+输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
+输出：7 -> 0 -> 8
+原因：342 + 465 = 807
+```
+
+思路：
+
+* 将两个链表看成是相同长度的进行遍历，如果一个链表较短则在前面补 0 ，比如 `987 + 23 = 987 + 023 = 1010` 
+* 每一位计算的同时需要考虑上一位的进位问题，而当前位计算结束后同样需要更新进位值
+* 如果两个链表全部遍历完毕后，进位值为 1 ，则在新链表最前方添加节点 1
+* 对于链表问题，返回结果为头结点时，通常需要先初始化一个预先指针 prev ，该指针的下一个节点指向真正的头结点 head 。使用预先指针的目的在于链表初始化时无可用节点值，而且链表构造过程需要指针移动，进而会导致头指针丢失，无法返回结果。
+
+代码：
+
+```js
+function addTwoNumbers(l1, l2) {
+  let prev = new Node(0)
+  let curr = prev
+  let carry = 0
+  while (l1 != null || l2 != null) {
+    let x = l1 == null ? 0 : l1.data
+    let y = l2 == null ? 0 : l2.data
+    let sum = x + y + carry
+    carry = sum / 10 >= 1 ? 1 : 0
+    sum = sum % 10
+    curr.next = new Node(sum)
+    curr = curr.next
+    if (l1) {
+      l1 = l1.next 
+    }
+    if (l2) {
+      l2 = l2.next 
+    }
+  }
+  if (carry == 1) {
+    curr.next = new Node(carry)
+  }
+  return prev.next
+}
+```
+
+
+
