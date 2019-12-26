@@ -245,6 +245,52 @@ function reverseList(head) {
 }
 ```
 
+时间复杂度为 O(n) ，空间复杂度为 O(1) 的迭代法：
+
+思路：
+
+在遍历列表时，将当前节点的 `next` 指针改为指向前一个元素。由于节点没有引用其上一个节点，因此必须事先存储其前一个元素。在更改引用之前，还需要另一个指针来存储下一个节点。不要忘记在最后返回新的头引用。
+
+代码：
+
+```js
+function reverseList(head) {
+  let prev = null
+  let curr = head
+  
+  while (curr != null) {
+    let temp = curr.next
+    curr.next = prev
+    prev = curr
+    curr = temp
+  }
+  
+  return prev
+}
+```
+
+时间复杂度为 O(n) ，空间复杂度为 O(n) 的递归法：
+
+思路：
+
+假设列表为：`n1 -> ... -> n(k-1) -> n(k) -> n(k+1) -> ... -> n(m) -> ∅`
+
+若节点从 `n(k+1)` 到 `n(m)` 已经被反转，而我们正处于 `n(k)`
+
+现在只需 `n(k).next.next = n(k)` 
+
+代码：
+
+```js
+function reverseList(head) {
+  if (head == null || head.next == null) return head
+  let p = reverseList(head.next)
+  head.next.next = head
+  head.next = null
+  return p
+}
+```
+
 **环形链表**
 
 给定一个链表，判断链表中是否有环。
