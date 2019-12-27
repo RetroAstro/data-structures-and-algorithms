@@ -1317,5 +1317,69 @@ function addTwoNumbers(l1, l2) {
 }
 ```
 
+**翻转二叉树**
+
+示例：
+
+输入：
+
+```js
+     4
+   /   \
+  2     7
+ / \   / \
+1   3 6   9
+```
+
+输出：
+
+```js
+     4
+   /   \
+  7     2
+ / \   / \
+9   6 3   1
+```
+
+思路：
+
+传入两个相同的 root 递归求解，当 t1 和 t2 都存在时，则交换数值，若只有其中一个存在，则通过其父节点交换子树，然后再递归其子节点的子树，注意不重复交换数值。
+
+代码：
+
+```js
+function invertTree(root) {
+  invert(root, root)
+  return root
+  
+  function invert(t1, t2, p1 = t1, p2 = t2) {
+    if (t1 == null && t2 == null) {
+      return
+    }
+
+    if (t1 == null && t2) {
+      let temp = p2.right
+      p2.right = null
+      p1.left = temp
+      invert(temp.left, temp.right, temp, temp)
+    }
+    else if (t2 == null && t1) {
+      let temp = p1.left
+      p1.left = null
+      p2.right = temp
+      invert(temp.left, temp.right, temp, temp)
+    }
+    else {
+      [t1.data, t2.data] = [t2.data, t1.data]
+      invert(t1.left, t2.right, t1, t2)
+    }
+    
+    if (t1 && t2 && t1 != t2) {
+      invert(t2.left, t1.right, t2, t1)
+    }
+  }
+}
+```
+
 
 
