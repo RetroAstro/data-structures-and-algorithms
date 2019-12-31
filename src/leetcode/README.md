@@ -1381,5 +1381,42 @@ function invertTree(root) {
 }
 ```
 
+**回文子串**
 
+给定一个字符串，你的任务是计算这个字符串中有多少个回文子串。
+
+示例：
+
+```js
+输入: "abc"
+输出: 3
+解释: 三个回文子串: "a", "b", "c"
+
+输入: "aaa"
+输出: 6
+说明: 6个回文子串: "a", "a", "a", "aa", "aa", "aaa"
+```
+
+思路：
+
+动态规划，从左到右，从单个字符到多个字符，存储记忆回文子串。
+
+代码：
+
+```js
+function countSubstrings(s) {
+  let count = 0
+  let len = s.length
+  let dp = Array.from({ length: len }, () => new Array(len).fill(0))
+  for (let i = 0; i < len; i++) {
+    for (let j = i; j >= 0; j--) {
+      if (s.charAt(i) == s.charAt(j) && (i - j < 2 || dp[j + 1][i - 1])) {
+        dp[j][i] = true
+        count++
+      }
+    }
+  }
+  return count
+}
+```
 
