@@ -1420,3 +1420,88 @@ function countSubstrings(s) {
 }
 ```
 
+**无重复字符的最长子串**
+
+给定一个字符串，请你找出其中不含有重复字符的 最长子串 的长度。
+
+示例：
+
+```js
+输入: "abcabcbb"
+输出: 3 
+
+输入: "bbbbb"
+输出: 1
+
+输入: "pwwkew"
+输出: 3
+```
+
+思路：
+
+暴力求解
+
+代码：
+
+```js
+function lengthOfLongestSubstring(s) {
+  if (s == '') return 0
+  let max = 1
+  let cursor = 0
+  let stack: string[] = []
+  while (cursor < s.length) {
+    let i = cursor
+    while (stack.every(item => item != s[i])) {
+      stack.push(s[i])
+      i++
+      if (s[i] == null) break
+    }
+    if (max < stack.length) {
+      max = stack.length
+    }
+    stack = []
+    cursor++
+  }
+  return max
+}
+```
+
+**寻找两个有序数组的中位数**
+
+给定两个大小为 m 和 n 的有序数组 nums1 和 nums2。
+
+请你找出这两个有序数组的中位数，并且要求算法的时间复杂度为 O(log(m + n))。
+
+你可以假设 nums1 和 nums2 不会同时为空。
+
+示例：
+
+```js
+nums1 = [1, 3]
+nums2 = [2]
+
+中位数是 2.0
+
+nums1 = [1, 2]
+nums2 = [3, 4]
+
+中位数是 2.5
+```
+
+思路：
+
+合并数组，排序，取中位数
+
+代码：
+
+```js
+function findMedianSortedArrays(nums1, nums2) {
+  let arr = nums1.concat(nums2).sort((a, b) => a - b)
+  let mid = Math.floor(arr.length / 2)
+  if (arr.length % 2 == 0) {
+    return (arr[mid - 1] + arr[mid]) / 2
+  }
+  return arr[mid]
+}
+```
+
