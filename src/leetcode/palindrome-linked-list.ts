@@ -2,12 +2,23 @@ import { Node } from '../data-structures/linked-list/models'
 
 export function isPalindrome(head: Node<number>) {
   let current = head
-  let list = []
+  let arr = []
 
   while (current != null) {
-    list.push(current.data)
+    arr.push(current.data)
     current = current.next
   }
 
-  return [...list].reverse().join('') === list.join('')
+  let i = 0
+  let j = arr.length - 1
+  
+  while (i < j) {
+    if (arr[i] == arr[j]) {
+      i++
+      j--
+    } else {
+      return false
+    }
+  }
+  return true
 }
