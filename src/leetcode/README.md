@@ -403,7 +403,6 @@ function deleteNode(node) {
 ```js
 function isPalindrome(head) {
   let current = head
-  let current = head
   let arr = []
 
   while (current != null) {
