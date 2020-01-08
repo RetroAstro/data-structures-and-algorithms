@@ -4,6 +4,7 @@ export function levelOrder<T>(root: Node<T>): T[][] {
   if (!root) return []
   let result = []
   let queue = [root]
+
   while (queue.length) {
     let arr = [], temp = []
     while (queue.length) {
@@ -19,5 +20,6 @@ export function levelOrder<T>(root: Node<T>): T[][] {
     queue = temp
     result.push(arr)
   }
+  
   return result
 }

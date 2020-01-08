@@ -4,6 +4,7 @@ export function addTwoNumbers<T extends Node<number>>(l1: T, l2: T) {
   let prev = new Node<number>(0)
   let curr = prev
   let carry = 0
+
   while (l1 != null || l2 != null) {
     let x = l1 == null ? 0 : l1.data
     let y = l2 == null ? 0 : l2.data
@@ -19,8 +20,10 @@ export function addTwoNumbers<T extends Node<number>>(l1: T, l2: T) {
       l2 = l2.next as T
     }
   }
+
   if (carry == 1) {
     curr.next = new Node<number>(carry)
   }
+  
   return prev.next
 }

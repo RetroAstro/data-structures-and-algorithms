@@ -3,6 +3,7 @@ export function lengthOfLongestSubstring(s: string) {
   let max = 1
   let cursor = 0
   let stack: string[] = []
+
   while (cursor < s.length) {
     let i = cursor
     while (stack.every(item => item != s[i])) {
@@ -16,5 +17,6 @@ export function lengthOfLongestSubstring(s: string) {
     stack = []
     cursor++
   }
+  
   return max
 }
