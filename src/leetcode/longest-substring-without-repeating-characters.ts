@@ -11,9 +11,7 @@ export function lengthOfLongestSubstring(s: string) {
       i++
       if (s[i] == null) break
     }
-    if (max < stack.length) {
-      max = stack.length
-    }
+    max = Math.max(max, stack.length)
     stack = []
     cursor++
   }
