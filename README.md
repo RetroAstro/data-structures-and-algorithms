@@ -182,7 +182,7 @@ $ npm run coverage  # 运行测试
 $ npm run build     # 构建项目
 ```
 
-## License
+### License
 
 MIT © [RetroAstro](https://github.com/RetroAstro)
 
