@@ -396,21 +396,33 @@ function deleteNode(node) {
 
 思路：
 
-遍历链表，用数组收集链表中节点的值，用 `reverse` 与 `join` 方法判断是否为回文。
+遍历链表，用数组收集链表中节点的值，双指针法判断是否为回文。
 
 代码：
 
 ```js
 function isPalindrome(head) {
   let current = head
-  let list = []
+  let current = head
+  let arr = []
 
   while (current != null) {
-    list.push(current.data)
+    arr.push(current.data)
     current = current.next
   }
 
-  return [...list].reverse().join('') === list.join('')
+  let i = 0
+  let j = arr.length - 1
+  
+  while (i < j) {
+    if (arr[i] == arr[j]) {
+      i++
+      j--
+    } else {
+      return false
+    }
+  }
+  return true
 }
 ```
 
