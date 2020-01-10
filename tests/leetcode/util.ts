@@ -9,10 +9,9 @@ export function getLinkedList(array: number[]) {
 
 export function output(node: Node<number>) {
   let result = []
-  while (node.next != null) {
+  while (node != null) {
     result.push(node.data)
     node = node.next
   }
-  result.push(node.data)
   return result
 }
