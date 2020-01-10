@@ -1677,3 +1677,96 @@ function reverse(x) {
   return res
 }
 ```
+
+**电话号码的字母组合**
+
+给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。
+
+给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母。
+
+![](https://assets.leetcode-cn.com/aliyun-lc-upload/original_images/17_telephone_keypad.png)
+
+示例：
+
+```js
+输入："23"
+输出：["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
+```
+
+思路：
+
+排列组合问题，递归求解。
+
+代码：
+
+```js
+function letterCombinations(digits) {
+  if (digits == '') return []
+  
+  let map = {
+    2: ['a', 'b', 'c'],
+    3: ['d', 'e', 'f'],
+    4: ['g', 'h', 'i'],
+    5: ['j', 'k', 'l'],
+    6: ['m', 'n', 'o'],
+    7: ['p', 'q', 'r', 's'],
+    8: ['t', 'u', 'v'],
+    9: ['w', 'x', 'y', 'z'],
+  }
+  let arr = digits.split('').map(key => map[key])
+  let res = []
+
+  recursive('', 0, arr)
+  return res
+
+  function recursive(str, depth, arr) {
+    let temp = arr[depth]
+    depth++
+    if (temp) {
+      temp.forEach(item => recursive(str + item, depth, arr))
+    } else {
+      res.push(str)
+    }
+  }
+}
+```
+
+**删除链表的倒数第 N 个节点**
+
+给定一个链表，删除链表的倒数第 n 个节点，并且返回链表的头结点。
+
+示例：
+
+```js
+给定一个链表: 1->2->3->4->5, 和 n = 2.
+
+当删除了倒数第二个节点后，链表变为 1->2->3->5.
+```
+
+思路：
+
+用数组保存每个链表节点的引用，`arr[arr.length - n - 1]` 为删除节点的前一个节点，注意头节点删除的情况。
+
+代码：
+
+```js
+function removeNthFromEnd(head, n) {
+  let curr = head
+  let arr = []
+
+  while (curr != null) {
+    arr.push(curr)
+    curr = curr.next
+  }
+
+  let node = arr[arr.length - n - 1]
+  
+  if (node) {
+    node.next = node.next.next
+  } else {
+    head = head.next
+  }
+  return head
+}
+```
+
