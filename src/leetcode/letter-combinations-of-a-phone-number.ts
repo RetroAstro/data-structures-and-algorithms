@@ -2,6 +2,7 @@ type Map = { [key: string]: string[] }
 
 export function letterCombinations(digits: string) {
   if (digits == '') return []
+  
   let map: Map = {
     2: ['a', 'b', 'c'],
     3: ['d', 'e', 'f'],
