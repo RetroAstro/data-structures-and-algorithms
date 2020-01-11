@@ -1770,3 +1770,145 @@ function removeNthFromEnd(head, n) {
 }
 ```
 
+**括号生成**
+
+给出 n 代表生成括号的对数，请你写出一个函数，使其能够生成所有可能的并且有效的括号组合。
+
+例如，给出 n = 3，生成结果为：
+
+```js
+[
+  "((()))",
+  "(()())",
+  "(())()",
+  "()(())",
+  "()()()"
+]
+```
+
+思路：
+
+1. 暴力法，先生成排列组合后的所有括号字符串，再利用栈来判断有效的括号组合。
+
+代码：
+
+```js
+function generateParenthesis(n) {
+  let pair = ['(', ')']
+  let res: string[] = []
+
+  recursive(0, '')
+  return res
+  
+  function recursive(depth, str) {
+    depth++
+    if (depth == 2 * n + 1) {
+      if (isValid(str)) {
+        res.push(str)
+      }
+    } else {
+      pair.forEach(p => recursive(depth, str + p))
+    }
+  }
+
+  function isValid(str) {
+    let stack = []
+    for (let i = 0; i < str.length; i++) {
+      if (stack[stack.length - 1] + str[i] == '()') {
+        stack.pop()
+      } else {
+        stack.push(str[i])
+      }
+    }
+    return stack.length == 0
+  }
+}
+```
+
+2. 动态规划，当我们清楚所有 i < n 时括号的可能生成排列后，对与 i = n 的情况，我们考虑整个括号排列中最左边的括号。
+它一定是一个左括号，那么它可以和它对应的右括号组成一组完整的括号 "( )" ，我们认为这一组是相比 n-1 增加进来的括号。
+
+剩下的括号要么在这一组新增的括号内部，要么在这一组新增括号的外部（右侧）。
+
+既然知道了 i < n 的情况，那我们就可以对所有情况进行遍历：
+
+"(" + 【i=p时所有括号的排列组合】 + ")" + 【i=q时所有括号的排列组合】
+
+其中 p + q = n-1，且 p q 均为非负整数。
+
+事实上，当上述 p 从 0 取到 n-1，q 从 n-1 取到 0 后，所有情况就遍历完了。
+
+代码：
+
+```js
+function generateParenthesis(n) {
+  if (n == 0) return ['']
+  if (n == 1) return ['()']
+
+  let total = [['none'], ['()']]
+
+  for (let i = 2; i < n + 1; i++) {
+    let temp = []
+    for (let j = 0; j < i; j++) {
+      let l1 = total[j]
+      let l2 = total[i - j - 1]
+
+      for (let k1 of l1) {
+        for (let k2 of l2) {
+          if (k1 == 'none') k1 = ''
+          if (k2 == 'none') k2 = ''
+          temp.push('(' + k1 + ')' + k2)
+        }
+      }
+    }
+    total.push(temp)
+  }
+
+  return total[n]
+}
+```
+
+**合并 K 个排序链表**
+
+合并 k 个排序链表，返回合并后的排序链表。请分析和描述算法的复杂度。
+
+示例：
+
+```js
+输入:
+[
+  1->4->5,
+  1->3->4,
+  2->6
+]
+输出: 1->1->2->3->4->4->5->6
+```
+
+思路：
+
+递归 + 分治法，时间复杂度 O(nlogK) ，k 为链表总数，n 为合并两个链表所用时间，空间复杂度 O(n) 。
+
+代码： 
+
+```js
+function mergeKLists(lists) {
+  if (lists.length == 0) {
+    return null
+  }
+  
+  return merge(0, lists.length - 1)
+
+  function merge(left, right) {
+    if (left == right) {
+      return lists[left]
+    }
+
+    let mid = left + ((right - left) >> 1)
+    let l1 = merge(left, mid)
+    let l2 = merge(mid + 1, right)
+
+    return mergeTwoLists(l1, l2)
+  }
+}
+```
+
