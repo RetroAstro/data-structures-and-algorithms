@@ -1,4 +1,4 @@
-import { Node } from '../../src/data-structures/linked-list/models'
+import { Node } from '../data-structures/linked-list/models'
 import { mergeTwoLists } from './merge-two-sorted-lists'
 
 export function mergeKLists<T>(lists: Node<T>[]) {

@@ -7,7 +7,7 @@ export function hasCycle(head: Node<number>) {
   let map = <Map>{}
 
   while (current != null) {
-    if (map[current.data] && map[current.data] === current) {
+    if (map[current.data] == current) {
       return true
     }
     map[current.data] = current

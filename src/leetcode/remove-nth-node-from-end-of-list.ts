@@ -1,4 +1,4 @@
-import { Node } from '../../src/data-structures/linked-list/models'
+import { Node } from '../data-structures/linked-list/models'
 
 export function removeNthFromEnd<T>(head: Node<T>, n: number) {
   let curr = head

@@ -1,4 +1,4 @@
-import { SequenceStack } from '../../src/data-structures/stack/sequence-stack'
+import { SequenceStack } from '../data-structures/stack/sequence-stack'
 
 export class Queue<T> {
   private stackX: SequenceStack<T>
