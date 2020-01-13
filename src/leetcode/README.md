@@ -1912,3 +1912,110 @@ function mergeKLists(lists) {
 }
 ```
 
+**环形链表 2**
+
+给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。
+
+为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。
+
+说明：不允许修改给定的链表
+
+示例：
+
+```js
+输入：head = [3,2,0,-4], pos = 1
+输出：tail connects to node index 1
+解释：链表中有一个环，其尾部连接到第二个节点。
+
+输入：head = [1,2], pos = 0
+输出：tail connects to node index 0
+解释：链表中有一个环，其尾部连接到第一个节点。
+
+输入：head = [1], pos = -1
+输出：no cycle
+解释：链表中没有环。
+```
+
+思路：
+
+这里我们初始化两个指针 - 快指针和慢指针。我们每次移动慢指针一步、快指针两步，直到快指针无法继续往前移动。如果在某次移动后，快慢指针指向了同一个节点，我们就返回它。否则，我们继续，直到 while 循环终止且没有返回任何节点，这种情况说明没有成环，我们返回 null 。
+
+给定阶段 1 找到的相遇点，阶段 2 将找到环的入口。首先我们初始化额外的两个指针： ptr1 ，指向链表的头， ptr2 指向相遇点。然后，我们每次将它们往前移动一步，直到它们相遇，它们相遇的点就是环的入口，返回这个节点。
+
+代码：
+
+```js
+function detectCycle(head) {
+  let slow = head
+  let fast = head
+  let start = head
+
+  while (fast != null && fast.next != null) {
+    slow = slow.next
+    fast = fast.next.next
+    if (slow == fast) {
+      while (slow != start) {
+        slow = slow.next
+        start = start.next
+      }
+      return slow
+    }
+  }
+  
+  return null
+}
+```
+
+**下一个排列**
+
+实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+
+如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+
+必须原地修改，只允许使用额外常数空间。
+
+以下是一些例子，输入位于左侧列，其相应输出位于右侧列。
+
+1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1
+
+思路：
+
+字典序
+
+* 从数组右侧向左开始遍历，找是否存在 nums[i] < nums[i+1] 的情况
+* 如果不存在这种 nums[i] < nums[i+1] 情况 ，for 循环会遍历到 i == 0（也就是没有下一个排列），此时按题意排成有序
+* 如果存在，则从数组右侧找到第一个比 nums[i] 大的数字并交换位置，然后再将 i + 1 之后的数组按升序排列
+
+代码：
+
+```js
+function nextPermutation(nums) {
+  let i = nums.length - 2
+
+  while (i >= 0 && nums[i] >= nums[i + 1]) {
+    i--
+  }
+
+  if (i >= 0) {
+    let j = nums.length - 1
+    while (j >= 0 && nums[j] <= nums[i]) {
+      j--
+    }
+    swap(nums, i, j)
+  }
+
+  reverse(i + 1)
+  return nums
+
+  function reverse(start, end = nums.length - 1) {
+    while (start < end) {
+      swap(nums, start, end)
+      start++
+      end--
+    }
+  }
+}
+```
+
