@@ -1,15 +1,16 @@
 import { MinHeap, MaxHeap } from './heap'
+import { Map } from './util'
 
 export class PriorityQueue<T> {
   heap: MinHeap<T> | MaxHeap<T>
 
-  constructor(type: 'min' | 'max') {
+  constructor(type: 'min' | 'max', intial?: T[], func?: Map<T>) {
     switch (type) {
       case 'min':
-        this.heap = new MinHeap<T>()
+        this.heap = new MinHeap<T>(intial, func)
         break
       case 'max':
-        this.heap = new MaxHeap<T>()
+        this.heap = new MaxHeap<T>(intial, func)
         break
       default:
         throw 'Invalid Type !'

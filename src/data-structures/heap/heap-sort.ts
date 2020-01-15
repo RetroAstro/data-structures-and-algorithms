@@ -1,11 +1,12 @@
 import { swap } from '../../algorithms/sorting/swap'
+import { heapify } from './heapify'
 
 export function heapSort(array: number[]) {
   buildMaxHeap(array)
   let size = array.length
   while (size > 1) {
     swap(array, 0, --size)
-    heapify(array, 0, size)
+    heapify(array, 0, size, compare)
   }
   return array
 }
@@ -13,22 +14,10 @@ export function heapSort(array: number[]) {
 function buildMaxHeap(array: number[]) {
   let maxIndex = Math.floor(array.length / 2)
   for (let i = maxIndex; i >= 0; i--) {
-    heapify(array, i, array.length)
+    heapify(array, i, array.length, compare)
   }
 }
 
-function heapify(array: number[], index: number, size: number) {
-  let temp = index
-  let left = 2 * index + 1
-  let right = 2 * index + 2
-  if (left < size && array[temp] < array[left]) {
-    temp = left
-  }
-  if (right < size && array[temp] < array[right]) {
-    temp = right
-  }
-  if (temp !== index) {
-    swap(array, temp, index)
-    heapify(array, temp, size)
-  }
+function compare(a: number, b: number) {
+  return a < b
 }
