@@ -31,7 +31,7 @@ export class MinHeap<T> {
     return removed
   }
 
-  getTopElement() {
+  peek() {
     return this.isEmpty() ? undefined : this.heap[0]
   }
 

@@ -15,12 +15,12 @@ describe('heap', () => {
     expect(minheap.isEmpty()).to.equal(true)
     expect(minheap.insert(undefined)).to.equal(false)
     expect(minheap.extract()).to.equal(undefined)
-    expect(minheap.getTopElement()).to.equal(undefined)
+    expect(minheap.peek()).to.equal(undefined)
     expect(maxheap.size()).to.equal(0)
     expect(maxheap.isEmpty()).to.equal(true)
     expect(maxheap.insert(undefined)).to.equal(false)
     expect(maxheap.extract()).to.equal(undefined)
-    expect(maxheap.getTopElement()).to.equal(undefined)
+    expect(maxheap.peek()).to.equal(undefined)
   })
 
   it('insert values into heap', () => {
@@ -83,11 +83,11 @@ describe('heap', () => {
   it('get top element in heap', () => {
     for (let i = 10; i >= 1; i--) {
       minheap.insert(i)
-      expect(minheap.getTopElement()).to.equal(i)
+      expect(minheap.peek()).to.equal(i)
     }
     for (let i = 1; i <= 10; i++) {
       maxheap.insert(i)
-      expect(maxheap.getTopElement()).to.equal(i)
+      expect(maxheap.peek()).to.equal(i)
     }
   })
 

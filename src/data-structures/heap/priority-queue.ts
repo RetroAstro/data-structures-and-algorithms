@@ -26,7 +26,7 @@ export class PriorityQueue<T> {
   }
 
   peek() {
-    return this.heap.getTopElement()
+    return this.heap.peek()
   }
 
   isEmpty() {
