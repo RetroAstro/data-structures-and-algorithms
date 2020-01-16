@@ -2,7 +2,7 @@ export enum Compare { lt = -1, gt = 1, eq = 0 }
 
 export type Map<T> = (a: T, b: T) => [any, any]
 
-export function compare<T>(a: T, b: T): number {
+export function compare<T>(a: T, b: T) {
   if (a === b) {
     return Compare.eq
   }

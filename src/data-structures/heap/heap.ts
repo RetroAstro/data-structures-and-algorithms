@@ -2,7 +2,7 @@ import { swap } from '../../algorithms/sorting/swap'
 import { Compare, Map, hoc, reverseCompare } from './util'
 
 export class MinHeap<T> {
-  protected compareFn: (a: T, b: T) => number
+  protected compareFn: (a: any, b: any) => Compare
 
   constructor(protected heap: T[] = [], func?: Map<T>) {
     this.compareFn = hoc(func)

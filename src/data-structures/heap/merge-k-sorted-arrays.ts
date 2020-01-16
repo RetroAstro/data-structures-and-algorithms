@@ -26,7 +26,7 @@ export function mergeKArrays(arrays: number[][]) {
 function buildMinHeap<T>(array: T[]) {
   let maxIndex = Math.floor(array.length / 2)
   for (let i = maxIndex; i >= 0; i--) {
-    heapify<payload<T>>(array, i, array.length, (a, b) => a.key > b.key)
+    heapify<payload<number>>(array, i, array.length, (a, b) => a.key > b.key)
   }
 }
 
