@@ -17,16 +17,19 @@ export function countingSort(array: number[]) {
     count[array[i]]++
   }
   for (let i = 1; i <= max; i++) {
-    count[i] = count[i - 1] + count[i]
+    count[i] += count[i - 1]
   }
 
-  let res = []
+  let temp = []
 
   for (let i = length - 1; i >= 0; i--) {
     let index = count[array[i]] - 1
-    res[index] = array[i]
+    temp[index] = array[i]
     count[array[i]]--
   }
+  for (let i = 0; i < length; i++) {
+    array[i] = temp[i]
+  }
 
-  return res
+  return array
 }
