@@ -2021,3 +2021,56 @@ function nextPermutation(nums) {
 }
 ```
 
+**最长有效括号**
+
+给定一个只包含 '(' 和 ')' 的字符串，找出最长的包含有效括号的子串的长度。
+
+示例：
+
+```js
+输入: "(()"
+输出: 2
+解释: 最长有效括号子串为 "()"
+
+输入: ")()())"
+输出: 4
+解释: 最长有效括号子串为 "()()"
+```
+
+思路：
+
+设置首尾哨兵元素，利用栈弹出有效括号，比较栈中剩余元素之间的距离。
+
+代码：
+
+```js
+function longestValidParentheses(s) {
+  let stack = []
+  let arr = [null, ...s.split(''), null].map((item, index) => [item, index])
+
+  for (let i = 0; i < arr.length; i++) {
+    stack.push(arr[i])
+
+    if (stack[stack.length - 1] && stack[stack.length - 2]) {
+      let str = stack[stack.length - 2][0] + stack[stack.length - 1][0]
+
+      if (str == '()') {
+        stack.pop()
+        stack.pop()
+      }
+    }
+  }
+
+  let max = 0
+
+  for (let i = 1; i < stack.length; i++) {
+    let gap = stack[i][1] - stack[i - 1][1] - 1
+    if (max < gap) {
+      max = gap
+    }
+  }
+
+  return max
+}
+```
+
