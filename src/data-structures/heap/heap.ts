@@ -1,11 +1,11 @@
 import { swap } from '../../algorithms/sorting/swap'
-import { Compare, Map, hoc, reverseCompare } from './util'
+import { Compare, Map, hof, reverseCompare } from './util'
 
 export class MinHeap<T> {
   protected compareFn: (a: any, b: any) => Compare
 
   constructor(protected heap: T[] = [], func?: Map<T>) {
-    this.compareFn = hoc(func)
+    this.compareFn = hof(func)
   }
 
   insert(data: T) {
@@ -91,6 +91,6 @@ export class MinHeap<T> {
 export class MaxHeap<T> extends MinHeap<T> {
   constructor(protected heap: T[] = [], func?: Map<T>) {
     super(heap, func)
-    this.compareFn = reverseCompare(hoc(func))
+    this.compareFn = reverseCompare(hof(func))
   }
 }

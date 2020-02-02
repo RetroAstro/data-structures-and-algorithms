@@ -9,7 +9,7 @@ export function compare<T>(a: T, b: T) {
   return a < b ? Compare.lt : Compare.gt
 }
 
-export function hoc<T>(func: Map<T> = (a: T, b: T) => [a, b]) {
+export function hof<T>(func: Map<T> = (a: T, b: T) => [a, b]) {
   return (a: T, b: T) => compare(...func(a, b))
 }
 
