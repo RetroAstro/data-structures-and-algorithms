@@ -13,10 +13,7 @@ export function radixSort(array: number[]) {
 
   for (let i = 0; i < length; i++) {
     let str = array[i].toString()
-    while (str.length < max) {
-      str = '0' + str
-    }
-    temp[i] = str
+    temp[i] = str.padStart(max, '0')
   }
   while (max > 0) {
     let items = temp.map(item => [Number(item[max - 1]), item])
