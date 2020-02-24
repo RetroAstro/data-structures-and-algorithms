@@ -2,9 +2,11 @@
 
 ![](https://camo.githubusercontent.com/72b8fa08522b87c996b58d36be5132a346d434c5/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f6c6963656e73652f6d6173686170652f6170697374617475732e7376673f6d61784167653d32353932303030) ![](https://travis-ci.org/RetroAstro/data-structures-and-algorithms.svg?branch=master) [![codecov](https://codecov.io/gh/RetroAstro/data-structures-and-algorithms/branch/master/graph/badge.svg)](https://codecov.io/gh/RetroAstro/data-structures-and-algorithms)  
 
-> 重学数据结构与算法 💭 [**剑指 Offer**](https://github.com/RetroAstro/coding-interviews) 💭
+> 重学数据结构与算法
 >
 > 提升自己的编程能力与逻辑思维能力  (๑•̀ㅂ•́)و✧ 
+
+💭[**剑指 Offer**](https://github.com/RetroAstro/coding-interviews) 💭
 
 ### 数组
 
