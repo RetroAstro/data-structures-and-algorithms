@@ -6,7 +6,7 @@
 >
 > 提升自己的编程能力与逻辑思维能力  (๑•̀ㅂ•́)و✧ 
 
-### :star:[《剑指 Offer》](https://github.com/RetroAstro/coding-interviews):star:
+番外篇 &nbsp; --- **[《剑指 Offer》](https://github.com/RetroAstro/coding-interviews)**
 
 ### 数组
 
