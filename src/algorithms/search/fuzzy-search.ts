@@ -6,7 +6,7 @@ export class FuzzySearch {
     let high = this.array.length - 1
 
     while (low <= high) {
-      let mid = low + ((high - low) >> 1)
+      let mid = (low + high) >> 1
 
       if (this.array[mid] > this.target) {
         high = mid - 1
@@ -28,7 +28,7 @@ export class FuzzySearch {
     let high = this.array.length - 1
 
     while (low <= high) {
-      let mid = low + ((high - low) >> 1)
+      let mid = (low + high) >> 1
 
       if (this.array[mid] > this.target) {
         high = mid - 1
@@ -50,7 +50,7 @@ export class FuzzySearch {
     let high = this.array.length - 1
 
     while (low <= high) {
-      let mid = low + ((high - low) >> 1)
+      let mid = (low + high) >> 1
 
       if (this.array[mid] >= this.target) {
         if (mid == 0 || this.array[mid - 1] < this.target) {
@@ -70,7 +70,7 @@ export class FuzzySearch {
     let high = this.array.length - 1
 
     while (low <= high) {
-      let mid = low + ((high - low) >> 1)
+      let mid = (low + high) >> 1
 
       if (this.array[mid] > this.target) {
         high = mid - 1

@@ -3,7 +3,7 @@ export function binarySearchIterative(array: number[], target: number) {
   let high = array.length - 1
 
   while (low <= high) {
-    let mid = low + ((high - low) >> 1)
+    let mid = (low + high) >> 1
 
     if (target === array[mid]) {
       return mid

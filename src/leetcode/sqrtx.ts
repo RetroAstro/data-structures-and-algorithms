@@ -3,7 +3,7 @@ export function mySqrt(x: number) {
   let high = x
 
   while (low <= high) {
-    let mid = low + ((high - low) >> 1)
+    let mid = (low + high) >> 1
 
     if (mid ** 2 === x) {
       return mid

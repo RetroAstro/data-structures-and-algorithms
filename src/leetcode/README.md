@@ -1079,7 +1079,7 @@ function mySqrt(x) {
   let high = x
 
   while (low <= high) {
-    let mid = low + ((high - low) >> 1)
+    let mid = (low + high) >> 1
 
     if (mid ** 2 === x) {
       return mid
@@ -1903,7 +1903,7 @@ function mergeKLists(lists) {
       return lists[left]
     }
 
-    let mid = left + ((right - left) >> 1)
+    let mid = (left + right) >> 1
     let l1 = merge(left, mid)
     let l2 = merge(mid + 1, right)
 
