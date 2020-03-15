@@ -2096,8 +2096,38 @@ function longestValidParentheses(s) {
 
 思路：
 
+我们使用 HashMap 来保存到第 i 个元素为止的累积和，但我们对这个前缀和除以 k 取余数。原因如下：
 
+我们遍历一遍给定的数组，记录到当前位置为止的 sum 。一旦我们找到新的 sum 的值（即在 HashMap 中没有这个值），我们就往 HashMap 中插入一条记录。
+
+现在，假设第 i 个位置的 sum 的值为 rem 。如果以 i 为左端点的任何子数组的和是 k 的倍数，比方说这个位置为 j ，那么 HashMap 中第 j 个元素保存的值为 (rem + n * k) % k ，其中 n 是某个大于 0 的整数。我们会发现 (rem + n * k) % k = rem ，也就是跟第 i 个元素保存到 HashMap 中的值相同。
+
+基于这一观察，我们得出结论：无论何时，只要 sum 的值已经被放入 HashMap 中了，代表着有两个索引 i 和 j ，它们之间元素的和是 k 的整数倍。因此，只要 HashMap 中有相同的 sum ，我们就可以直接返回 true 。
 
 代码：
 
+```js
+function checkSubarraySum(nums, k) {
+  let sum = 0
+  let map = {}
+
+  map[0] = -1
+
+  for (let i = 0; i < nums.length; i++) {
+    sum += nums[i]
+    if (k != 0) {
+      sum = sum % k
+    }
+    if (map[sum] != null) {
+      if (i - map[sum] > 1) {
+        return true
+      }
+    } else {
+      map[sum] = i
+    }
+  }
+
+  return false
+}
+```
 
